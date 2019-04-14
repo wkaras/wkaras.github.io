@@ -1,1654 +1,449 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
-xmlns="http://www.w3.org/TR/REC-html40">
-
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
-<meta name=ProgId content=Word.Document>
-<meta name=Generator content="Microsoft Word 10">
-<meta name=Originator content="Microsoft Word 10">
-<link rel=File-List href="hex_to_dec_files/filelist.xml">
-<title>C conversion of hex number to decimal</title>
-<!--[if gte mso 9]><xml>
- <o:OfficeDocumentSettings>
-  <o:DoNotRelyOnCSS/>
- </o:OfficeDocumentSettings>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <w:WordDocument>
-  <w:ActiveWritingStyle Lang="EN-US" VendorID="64" DLLVersion="131078"
-   NLCheck="1">1</w:ActiveWritingStyle>
-  <w:ActiveWritingStyle Lang="ES-MX" VendorID="64" DLLVersion="131078"
-   NLCheck="1">1</w:ActiveWritingStyle>
-  <w:SpellingState>Clean</w:SpellingState>
-  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
- </w:WordDocument>
-</xml><![endif]-->
-<style>
-<!--
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{mso-style-parent:"";
-	margin:0in;
-	margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:"Times New Roman";
-	mso-fareast-font-family:"Times New Roman";}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;
-	text-underline:single;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:purple;
-	text-decoration:underline;
-	text-underline:single;}
-span.SpellE
-	{mso-style-name:"";
-	mso-spl-e:yes;}
-@page Section1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;
-	mso-header-margin:.5in;
-	mso-footer-margin:.5in;
-	mso-paper-source:0;}
-div.Section1
-	{page:Section1;}
- /* List Definitions */
- @list l0
-	{mso-list-id:1553495076;
-	mso-list-type:hybrid;
-	mso-list-template-ids:-1843073990 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
-@list l0:level1
-	{mso-level-tab-stop:.25in;
-	mso-level-number-position:left;
-	margin-left:.25in;
-	text-indent:-.25in;}
-@list l0:level2
-	{mso-level-tab-stop:1.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level3
-	{mso-level-tab-stop:1.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level4
-	{mso-level-tab-stop:2.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level5
-	{mso-level-tab-stop:2.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level6
-	{mso-level-tab-stop:3.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level7
-	{mso-level-tab-stop:3.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level8
-	{mso-level-tab-stop:4.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level9
-	{mso-level-tab-stop:4.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-ol
-	{margin-bottom:0in;}
-ul
-	{margin-bottom:0in;}
--->
-</style>
-<!--[if gte mso 10]>
-<style>
- /* Style Definitions */
- table.MsoNormalTable
-	{mso-style-name:"Table Normal";
-	mso-tstyle-rowband-size:0;
-	mso-tstyle-colband-size:0;
-	mso-style-noshow:yes;
-	mso-style-parent:"";
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:10.0pt;
-	font-family:"Times New Roman";}
-table.MsoTableGrid
-	{mso-style-name:"Table Grid";
-	mso-tstyle-rowband-size:0;
-	mso-tstyle-colband-size:0;
-	border:solid windowtext 1.0pt;
-	mso-border-alt:solid windowtext .5pt;
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-border-insideh:.5pt solid windowtext;
-	mso-border-insidev:.5pt solid windowtext;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:10.0pt;
-	font-family:"Times New Roman";}
-</style>
-<![endif]--><!--[if gte mso 9]><xml>
- <o:shapedefaults v:ext="edit" spidmax="8194"/>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <o:shapelayout v:ext="edit">
-  <o:idmap v:ext="edit" data="1"/>
- </o:shapelayout></xml><![endif]-->
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>C conversion of hex number to decimal</title>
+	<meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2025-03-14T22:05:36.946123083"/>
+	<meta name="Originator" content="Microsoft Word 10"/>
+	<meta name="ProgId" content="Word.Document"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin-left: 0.79in; margin-right: 0.39in; margin-top: 0.39in; margin-bottom: 0.39in }
+		p { color: #000000; line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		pre { color: #000000; background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		a:link { color: #0000ff; text-decoration: underline }
+		a:visited { color: #800080; text-decoration: underline }
+	</style>
 </head>
-
-<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
-
-<div class=Section1>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 face="Times New Roman"><span
-style='font-size:12.0pt'>Write an <i><span style='font-style:italic'>optimized</span></i>
-<i><span style='font-style:italic'>C</span></i> program to convert a base 16
-number to its base 10 equivalent, without using the standard C libraries, i.e.
-don&#8217;t use </span></font><span class=SpellE><i><font face="Courier New"><span
-style='font-family:"Courier New";font-style:italic'>scanf</span></font></i></span><i><font
-face="Courier New"><span style='font-family:"Courier New";font-style:italic'>(&#8220;%x&#8221;).</span></font></i><span
-style='mso-spacerun:yes'>  </span>The program should allow the user to input
-the number.<span style='mso-spacerun:yes'>  </span>State any assumptions you
-made when writing the program.<span style='mso-spacerun:yes'>  </span>Use 23DA
-as a test number.</p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 face="Times New Roman"><span
-style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>Assumptions:<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>1.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>I can skip checks for output errors.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>2.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>I can use <span class=SpellE>getchar</span>()
-and <span class=SpellE>putchar</span>().<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>3.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><span
-class=SpellE><font color=blue><span style='color:blue'>getchar</span></font></span><font
-color=blue><span style='color:blue'>() returns character codes that fit in an
-unsigned char.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>4.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>An input character that is not a valid hex
-digit indicates the end of input.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>5.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>By optimized, you mean optimized for
-execution time.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>6.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>It is sufficient to convert numbers with 32
-bits or less of precision (the minimum precision of a long allowed by ANSI C).<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>7.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>I can write a program (which is not overly
-optimized and which uses <span class=SpellE>fprintf</span>()) that outputs a
-header file for the conversion program.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:-9.0pt list .25in'><![if !supportLists]><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>8.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>&#8216;d&#8217; &#8211; &#8216;0&#8217; = d
-for d in 0, 1, 2, &#8230; 9.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>To convert hex
-digit character codes to binary values, I use a (sparse) lookup table.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>To avoid
-dividing by 10, I use &#8220;8-bit BCD&#8221; arithmetic to accumulate the
-number being converted.<span style='mso-spacerun:yes'>  </span>By 8-bit BCD, I
-mean the following representation of a number:<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;mso-yfti-tbllook:480;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
- <tr style='mso-yfti-irow:0'>
-  <td width=118 valign=top style='width:88.55pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border:none;border-bottom:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>most
-  significant<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border:none;border-bottom:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border:none;border-bottom:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.6pt;border:none;border-bottom:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>least significant<o:p></o:p></span></font></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:1'>
-  <td width=118 valign=top style='width:88.55pt;border:none;border-right:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>Low<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d4<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d3<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d2<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.6pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d1<o:p></o:p></span></font></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:2'>
-  <td width=118 valign=top style='width:88.55pt;border:none;border-right:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>Middle<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d8<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d7<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d6<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.6pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d5<o:p></o:p></span></font></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
-  <td width=118 valign=top style='width:88.55pt;border:none;border-right:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>High<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>0<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>0<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d10<o:p></o:p></span></font></p>
-  </td>
-  <td width=118 valign=top style='width:88.6pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;
-  mso-border-top-alt:solid windowtext 1.5pt;mso-border-left-alt:solid windowtext 1.5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-  face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d9<o:p></o:p></span></font></p>
-  </td>
- </tr>
+<body lang="en-US" text="#000000" link="#0000ff" vlink="#800080" dir="ltr"><p class="msonormal">
+<font face="Times New Roman"><font size="3" style="font-size: 12pt">Write
+an </font></font><font face="Times New Roman"><font size="3" style="font-size: 12pt"><i>optimized</i></font></font><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+</font></font><font face="Times New Roman"><font size="3" style="font-size: 12pt"><i>C</i></font></font><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+program to convert a base 16 number to its base 10 equivalent,
+without using the standard C libraries, i.e. donâ€™t use </font></font><font face="Courier New"><i>scanf(â€œ%xâ€).</i></font>
+ The program should allow the user to input the number.  State any
+assumptions you made when writing the program.  Use 23DA as a test
+number.</p>
+<p class="msonormal"> 
+</p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">Assumptions:</font></font></font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">1.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">I can skip
+checks for output errors.</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">2.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">I can use
+getchar() and putchar().</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">3.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">getchar()
+returns character codes that fit in an unsigned char.</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">4.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">An input
+character that is not a valid hex digit indicates the end of input.</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">5.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">By optimized,
+you mean optimized for execution time.</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">6.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">It is
+sufficient to convert numbers with 32 bits or less of precision (the
+minimum precision of a long allowed by ANSI C).</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">7.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">I can write a
+program (which is not overly optimized and which uses fprintf()) that
+outputs a header file for the conversion program.</font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">8.</font></font></font><span style="font-variant: normal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">
+     </font></font></font></span><font color="#0000ff">â€˜dâ€™ â€“
+â€˜0â€™ = d for d in 0, 1, 2, â€¦ 9. </font>
+</p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">To
+convert hex digit character codes to binary values, I use a (sparse)
+lookup table.</font></font></font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">To
+avoid dividing by 10, I use â€œ8-bit BCDâ€ arithmetic to accumulate
+the number being converted.  By 8-bit BCD, I mean the following
+representation of a number:</font></font></font></p>
+<table cellpadding="0" cellspacing="0">
+	<tr valign="top">
+		<td width="118" style="border: none; padding: 0in"><p class="msonormal">
+			<font color="#0000ff"> </font>
+			</p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">most
+			significant</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in"><p class="msonormal">
+			<font color="#0000ff"> </font>
+			</p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in"><p class="msonormal">
+			<font color="#0000ff"> </font>
+			</p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">least
+			significant</font></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="118" style="border-top: none; border-bottom: none; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">Low</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d4</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d3</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d2</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d1</font></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="118" style="border-top: none; border-bottom: none; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">Middle</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d8</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d7</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d6</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d5</font></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="118" style="border-top: none; border-bottom: none; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">High</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">0</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">0</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d10</font></font></font></p>
+		</td>
+		<td width="118" style="border-top: none; border-bottom: 1.50pt solid #000000; border-left: none; border-right: 1.50pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.08in"><p class="msonormal">
+			<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d9</font></font></font></p>
+		</td>
+	</tr>
 </table>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>d1, d2,
-&#8230; d10 are the decimal digits of the number from least to most
-significant.<span style='mso-spacerun:yes'>  </span>Each row in this table
-represents an unsigned long.<span style='mso-spacerun:yes'>  </span>Each cell
-represents an 8-bit field.<span style='mso-spacerun:yes'>  </span>I use a
-lookup table to implement the following function:<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>f(<span
-class=SpellE>hex_digit</span>, n) &#8594; 8-bit BCD representation of (<span
-class=SpellE>hex_digit</span> * 16<sup>n</sup>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>I add together
-the 8-bit BCD representations of the digits (with their place value) in the hex
-number.<span style='mso-spacerun:yes'>  </span>I add low to low, middle to
-middle, and high to high, without renormalizing the 8-bit fields to decimal
-digits.<span style='mso-spacerun:yes'>  </span>Since there are at most 8 hex
-digits, each field will have a maximum value of<span style='mso-spacerun:yes'> 
-</span>8 x 9 or 72 in the resulting sum.<span style='mso-spacerun:yes'> 
-</span>Thus no field will overflow.<span style='mso-spacerun:yes'>  </span>I
-then renormalize the 8-bit BCD sum and put the resulting digits into a byte
-array (in one step).<span style='mso-spacerun:yes'>  </span>I use a lookup
-table to do the division by 10.<span style='mso-spacerun:yes'>  </span>Since
-each field has a maximum value of 72, and the maximum carry is 7, the
-&#8220;divide by 10&#8221; lookup table has a maximum index of 79.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>Here is the
-program that generates the include file &#8220;<span class=SpellE>hextodec.h</span>&#8221;,
-which contains the lookup tables described above.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &lt;<span class=SpellE>stdio.h</span>&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &lt;<span class=SpellE>limits.h</span>&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>typedef unsigned long <span class=SpellE>ulong</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>/* Given a value, output (as text) the 8-bit BCD representation of
-the<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>** value in the format &quot;{<span class=SpellE>low,middle,high</span>}&quot;
-*/<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>void bcd8bit(FILE *<span class=SpellE>fp</span>, <span
-class=SpellE>ulong</span> <span class=SpellE>val</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>ulong</span>
-v;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>unsigned <span
-class=SpellE>i</span>, <span class=SpellE>shft</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;{&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>for (<span class=SpellE>i</span>
-= 0; ; <span class=SpellE>i</span>++)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>v = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span
-style='mso-spacerun:yes'>    </span>for (<span class=SpellE>shft</span> = 0; <span
-class=SpellE>shft</span> &lt; 32; <span class=SpellE>shft</span> += 8)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>v += (<span
-class=SpellE>val</span> % 10) &lt;&lt; <span class=SpellE>shft</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span><span
-class=SpellE>val</span> /= 10;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;0x%lx&quot;, v);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>if (<span
-class=SpellE>i</span> == 2)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;,&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;}&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=SpellE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>int</span></font></span><font size=2 color=blue face="Courier New"><span
-style='font-size:10.0pt;font-family:"Courier New";color:blue'> main()<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>int</span>
-<span class=SpellE>i</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>ulong</span>
-<span class=SpellE>hdig</span>, pow16;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>int</span>
-d, r;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>FILE *<span class=SpellE>fp</span>
-= <span class=SpellE>fopen</span>(&quot;<span class=SpellE>hextodec.h</span>&quot;,
-&quot;w&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* Output lookup table
-from character codes to binary values of<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** hex digits.<span
-style='mso-spacerun:yes'>  </span>If a character is not a hex digit, you get -1
-when<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** you look it up. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;const signed char <span class=SpellE>hex_val</span>[]
-= {\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>#define X(CHAR, VAL) case
-CHAR : <span class=SpellE>fprintf</span>(<span class=SpellE>fp</span>, #VAL);
-break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>for (<span class=SpellE>i</span>
-= 0; ; <span class=SpellE>i</span>++)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>switch (<span
-class=SpellE>i</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('0', 0)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('1', 1)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('2', 2)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('3', 3)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('4', 4)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('5', 5)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('6', 6)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('7', 7)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('8', 8)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('9', 9)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('a', 10)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('b', 11)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('c', 12)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('d', 13)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('e', 14)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>       </span><span
-style='mso-spacerun:yes'>   </span>X('f', 15)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('A', 10)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('B', 11)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('C', 12)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('D', 13)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('E', 14)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>X('F', 15)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>default: <span
-class=SpellE>fprintf</span>(<span class=SpellE>fp</span>, &quot;-1&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>if (<span
-class=SpellE>i</span> == UCHAR_MAX)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;,\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;};\n\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;typedef unsigned long <span class=SpellE>ulong</span>;\n\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* Output lookup table
-that, given a hex digit and the number of digits<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** to the right of it,
-yields the place value of the digit as an 8-bit<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** BCD value.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** usage: <span
-class=SpellE>cvt_bcd</span>[(digits to the right) * 15 + (digit value)] -&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>**<span
-style='mso-spacerun:yes'>   </span>place value of digit as 8-bit BCD value.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>*/<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>,<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>&quot;const struct <span
-class=SpellE>cvt_bcd_S</span> { <span class=SpellE>ulong</span> low, mid, hi; }
-<span class=SpellE>cvt_bcd</span>[] = {\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>for (pow16 = 1; ; pow16
-&lt;&lt;= 4)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>for (<span
-class=SpellE>hdig</span> = 0; ; <span class=SpellE>hdig</span>++)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>bcd8bit(fp, <span
-class=SpellE>hdig</span> * pow16);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>if (<span
-class=SpellE>hdig</span> == 15)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span><span
-class=SpellE>fprintf</span>(<span class=SpellE>fp</span>, &quot;,\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>if (pow16 ==
-0x10000000L)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;,\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;};\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* Output lookup table
-for dividing by 10.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** Usage:<span
-style='mso-spacerun:yes'>  </span>div10[N] -&gt; { N / 10, N % 10 }<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>*/<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>,<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>&quot;const struct
-div10_S { unsigned char div, <span class=SpellE>rem</span>; } div10[] =
-{\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>d = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'> </span><span
-style='mso-spacerun:yes'>   </span>r = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>for ( ; ; )<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;{%d,%d}&quot;, d, r);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>if ((d == 7)
-&amp;&amp; (r == 9))<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;,\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>if (r == 9)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>r = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>d++;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>else<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>r++;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fprintf</span>(<span
-class=SpellE>fp</span>, &quot;};\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>fclose</span>(<span
-class=SpellE>fp</span>);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>return(0);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>Here is the
-program that does the actual conversion.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &lt;<span class=SpellE>limits.h</span>&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &lt;<span class=SpellE>stdio.h</span>&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &quot;<span class=SpellE>hextodec.h</span>&quot;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=SpellE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>int</span></font></span><font size=2 color=blue face="Courier New"><span
-style='font-size:10.0pt;font-family:"Courier New";color:blue'> main()<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* Hex digits:<span
-style='mso-spacerun:yes'>  </span>binary encoded, [0] is most significant.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** Decimal digits:<span
-style='mso-spacerun:yes'>  </span>binary encoded, [0] is least significant. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>unsigned char dig[10];<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* Accumulator for number
-to convert as 8-bit BCD.<span style='mso-spacerun:yes'>  </span><span
-class=SpellE>accum</span>[0] is<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** low, <span
-class=SpellE>accum</span>[1] is middle, <span class=SpellE>accum</span>[2] is
-high. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>ulong</span>
-<span class=SpellE>accum</span>[3];<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* Scratch variables. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>unsigned char y;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>int</span>
-c;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>do<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>/* Read hex digits of
-number to convert from standard input. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>signed char <span
-class=SpellE>sb</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>y = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>for ( ; ; )<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span
-style='mso-spacerun:yes'>    </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>c = <span
-class=SpellE>getchar</span>();<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>if ((c &lt; 0)
-|| (c &gt;= UCHAR_MAX))<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>sb</span> = <span class=SpellE>hex_val</span>[c];<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>if (<span
-class=SpellE>sb</span> &lt; 0)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>dig[y++] = <span
-class=SpellE>sb</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>if (y == 8)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>/* If a number was
-read... */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>if (y)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>/* Accumulate the
-value of each hex digit, without normalizing<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>** the sum. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>const struct <span
-class=SpellE>cvt_bcd_S</span> *<span class=SpellE>p_cvt_pow</span> = <span
-class=SpellE>cvt_bcd</span>, *p_cvt_dig;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>accum</span>[0] = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>accum</span>[1] = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>accum</span>[2] = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>for ( ; ; )<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span><span
-class=SpellE>p_cvt_dig</span> = <span class=SpellE>p_cvt_pow</span> + dig[--y];<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span><span
-class=SpellE>accum</span>[0] += <span class=SpellE>p_cvt_dig</span>-&gt;low;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span><span
-class=SpellE>accum</span>[1] += <span class=SpellE>p_cvt_dig</span>-&gt;mid;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span><span
-class=SpellE>accum</span>[2] += <span class=SpellE>p_cvt_dig</span>-&gt;hi;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span>if (y == 0)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span><span
-class=SpellE>p_cvt_pow</span> += 16;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>ulong</span> *<span class=SpellE>p_accum</span> = <span
-class=SpellE>accum</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>ulong</span> *<span class=SpellE>p_accum_end</span> = <span
-class=SpellE>accum</span> + 2;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>const struct
-div10_S *p_div10;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>unsigned char
-carry;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span><span
-class=SpellE>putchar</span>('\n');<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>/* Ignore high,
-or high and middle, in accumulator if they are<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>     </span><span
-style='mso-spacerun:yes'>         </span>** zero. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>while (!*<span
-class=SpellE>p_accum_end</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>if (<span
-class=SpellE>p_accum_end</span> == <span class=SpellE>accum</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span>/* The
-number being converted is zero. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span><span
-class=SpellE>putchar</span>('0');<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span><span
-class=SpellE>goto</span> ZERO;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span><span
-style='mso-spacerun:yes'>        </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>else<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span><span
-class=SpellE>p_accum_end</span>--;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>/* Normalize
-accumulator, placing resulting digits in a<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>** byte array.
-*/<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>y = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>carry = 0;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>for ( ; ; )<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span>p_div10 =
-div10 + ((*<span class=SpellE>p_accum</span> &amp; 0xFF) + carry);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span></span></font><span
-class=SpellE><font size=2 color=blue face="Courier New"><span lang=ES-MX
-style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
-ES-MX'>dig</span></font></span><font size=2 color=blue face="Courier New"><span
-lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";color:blue;
-mso-ansi-language:ES-MX'>[<span class=SpellE>y++</span>] = <span class=SpellE>p_div10</span>-&gt;<span
-class=SpellE>rem</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";
-color:blue;mso-ansi-language:ES-MX'><span
-style='mso-spacerun:yes'>                  </span></span></font><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>carry = p_div10-&gt;div;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span>if (!(y
-&amp; 3))<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                      </span><span
-class=SpellE>p_accum</span>++;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span><span
-style='mso-spacerun:yes'>  </span>if (<span class=SpellE>p_accum</span> &gt; <span
-class=SpellE>p_accum_end</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                       
-</span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                  </span>else<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                      </span>*<span
-class=SpellE>p_accum</span> &gt;&gt;= 8;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                      </span>if ((!*<span
-class=SpellE>p_accum</span>) &amp;&amp; (<span class=SpellE>p_accum</span> == <span
-class=SpellE>p_accum_end</span>))<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                        </span>break;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                    </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>/* Output
-decimal value. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>if (carry)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span><span
-class=SpellE>putchar</span>(carry + '0');<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span>do<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                </span><span
-class=SpellE>putchar</span>(dig[--y] + '0');<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>              </span></span></font><span
-class=SpellE><font size=2 color=blue face="Courier New"><span lang=ES-MX
-style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
-ES-MX'>while</span></font></span><font size=2 color=blue face="Courier New"><span
-lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";color:blue;
-mso-ansi-language:ES-MX'> (y);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";
-color:blue;mso-ansi-language:ES-MX'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";
-color:blue;mso-ansi-language:ES-MX'><span
-style='mso-spacerun:yes'>              </span>ZERO:<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";
-color:blue;mso-ansi-language:ES-MX'><span
-style='mso-spacerun:yes'>              </span><span class=SpellE>putchar</span>('<span
-class=SpellE>\n</span>');<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span lang=ES-MX style='font-size:10.0pt;font-family:"Courier New";
-color:blue;mso-ansi-language:ES-MX'><span style='mso-spacerun:yes'>           
-</span></span></font><font size=2 color=blue face="Courier New"><span
-style='font-size:10.0pt;font-family:"Courier New";color:blue'>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>while (c != EOF);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>return(0);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>23DA hex is
-9178 decimal.<span style='mso-spacerun:yes'>  </span>I tested this solution
-against the straightforward one on my (Pentium-based) PC, and this solution is
-faster.<span style='mso-spacerun:yes'>  </span>This solution (when you count
-the lookup tables) is much bigger, so performance is potentially dependent on
-processor cache size.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-</div>
-
+<p class="msonormal"><br/>
+<br/>
+
+</p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">d1,
+d2, â€¦ d10 are the decimal digits of the number from least to most
+significant.  Each row in this table represents an unsigned long. 
+Each cell represents an 8-bit field.  I use a lookup table to
+implement the following function:</font></font></font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">f(hex_digit,
+n) â†’ 8-bit BCD representation of (hex_digit * 16</font></font><sup><font face="Times New Roman"><font size="3" style="font-size: 12pt">n</font></font></sup><font face="Times New Roman"><font size="3" style="font-size: 12pt">)</font></font>
+</font>
+</p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">I
+add together the 8-bit BCD representations of the digits (with their
+place value) in the hex number.  I add low to low, middle to middle,
+and high to high, without renormalizing the 8-bit fields to decimal
+digits.  Since there are at most 8 hex digits, each field will have a
+maximum value of  8 x 9 or 72 in the resulting sum.  Thus no field
+will overflow.  I then renormalize the 8-bit BCD sum and put the
+resulting digits into a byte array (in one step).  I use a lookup
+table to do the division by 10.  Since each field has a maximum value
+of 72, and the maximum carry is 7, the â€œdivide by 10â€ lookup
+table has a maximum index of 79.</font></font></font></p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">Here
+is the program that generates the include file â€œhextodec.hâ€,
+which contains the lookup tables described above.</font></font></font></p>
+<pre class="western">#include &lt;stdio.h&gt;
+#include &lt;limits.h&gt;
+ 
+typedef unsigned long ulong;
+ 
+/* Given a value, output (as text) the 8-bit BCD representation of the
+** value in the format &quot;{low,middle,high}&quot; */
+void bcd8bit(FILE *fp, ulong val)
+  {
+    ulong v;
+    unsigned i, shft;
+ 
+    fprintf(fp, &quot;{&quot;);
+ 
+    for (i = 0; ; i++)
+      {
+        v = 0;
+ 
+        for (shft = 0; shft &lt; 32; shft += 8)
+          {
+            v += (val % 10) &lt;&lt; shft;
+            val /= 10;
+          }
+        fprintf(fp, &quot;0x%lx&quot;, v);
+ 
+        if (i == 2)
+          break;
+ 
+        fprintf(fp, &quot;,&quot;);
+      }
+ 
+    fprintf(fp, &quot;}&quot;);
+  }
+ 
+int main()
+  {
+    int i;
+    ulong hdig, pow16;
+    int d, r;
+ 
+    FILE *fp = fopen(&quot;hextodec.h&quot;, &quot;w&quot;);
+ 
+    /* Output lookup table from character codes to binary values of
+    ** hex digits.  If a character is not a hex digit, you get -1 when
+    ** you look it up. */
+ 
+    fprintf(fp, &quot;const signed char hex_val[] = {\n&quot;);
+ 
+    #define X(CHAR, VAL) case CHAR : fprintf(fp, #VAL); break;
+ 
+    for (i = 0; ; i++)
+      {
+        switch (i)
+          {
+          X('0', 0)
+          X('1', 1)
+          X('2', 2)
+          X('3', 3)
+          X('4', 4)
+          X('5', 5)
+          X('6', 6)
+          X('7', 7)
+          X('8', 8)
+          X('9', 9)
+          X('a', 10)
+          X('b', 11)
+          X('c', 12)
+          X('d', 13)
+          X('e', 14)
+          X('f', 15)
+          X('A', 10)
+          X('B', 11)
+          X('C', 12)
+          X('D', 13)
+          X('E', 14)
+          X('F', 15)
+          default: fprintf(fp, &quot;-1&quot;);
+          }
+        if (i == UCHAR_MAX)
+          break;
+        fprintf(fp, &quot;,\n&quot;);
+      }
+    fprintf(fp, &quot;};\n\n&quot;);
+ 
+    fprintf(fp, &quot;typedef unsigned long ulong;\n\n&quot;);
+ 
+    /* Output lookup table that, given a hex digit and the number of digits
+    ** to the right of it, yields the place value of the digit as an 8-bit
+    ** BCD value.
+    ** usage: cvt_bcd[(digits to the right) * 15 + (digit value)] -&gt;
+    **   place value of digit as 8-bit BCD value.
+    */
+ 
+    fprintf(fp,
+      &quot;const struct cvt_bcd_S { ulong low, mid, hi; } cvt_bcd[] = {\n&quot;);
+ 
+    for (pow16 = 1; ; pow16 &lt;&lt;= 4)
+      {
+        for (hdig = 0; ; hdig++)
+          {
+            bcd8bit(fp, hdig * pow16);
+            if (hdig == 15)
+              break;
+            fprintf(fp, &quot;,\n&quot;);
+          }
+        if (pow16 == 0x10000000L)
+          break;
+        fprintf(fp, &quot;,\n&quot;);
+      }
+ 
+    fprintf(fp, &quot;};\n&quot;);
+ 
+    /* Output lookup table for dividing by 10.
+    ** Usage:  div10[N] -&gt; { N / 10, N % 10 }
+    */
+ 
+    fprintf(fp,
+      &quot;const struct div10_S { unsigned char div, rem; } div10[] = {\n&quot;);
+ 
+    d = 0;
+    r = 0;
+    for ( ; ; )
+      {
+        fprintf(fp, &quot;{%d,%d}&quot;, d, r);
+        if ((d == 7) &amp;&amp; (r == 9))
+          break;
+        fprintf(fp, &quot;,\n&quot;);
+        if (r == 9)
+          {
+            r = 0;
+            d++;
+          }
+        else
+          r++;
+      }
+ 
+    fprintf(fp, &quot;};\n&quot;);
+ 
+    fclose(fp);
+ 
+    return(0);
+  }
+ 
+Here is the program that does the actual conversion.
+ 
+#include &lt;limits.h&gt;
+#include &lt;stdio.h&gt;
+ 
+#include &quot;hextodec.h&quot;
+ 
+int main()
+  {
+    /* Hex digits:  binary encoded, [0] is most significant.
+    ** Decimal digits:  binary encoded, [0] is least significant. */
+    unsigned char dig[10];
+ 
+    /* Accumulator for number to convert as 8-bit BCD.  accum[0] is
+    ** low, accum[1] is middle, accum[2] is high. */
+    ulong accum[3];
+ 
+    /* Scratch variables. */
+    unsigned char y;
+    int c;
+ 
+    do
+      {
+        /* Read hex digits of number to convert from standard input. */
+        {
+          signed char sb;
+          y = 0;
+          for ( ; ; )
+            {
+              c = getchar();
+              if ((c &lt; 0) || (c &gt;= UCHAR_MAX))
+                break;
+              sb = hex_val[c];
+              if (sb &lt; 0)
+                break;
+              dig[y++] = sb;
+              if (y == 8)
+                break;
+            }
+        }
+ 
+        /* If a number was read... */
+        if (y)
+          {
+            /* Accumulate the value of each hex digit, without normalizing
+            ** the sum. */
+            {
+              const struct cvt_bcd_S *p_cvt_pow = cvt_bcd, *p_cvt_dig;
+ 
+              accum[0] = 0;
+              accum[1] = 0;
+              accum[2] = 0;
+ 
+              for ( ; ; )
+                {
+                  p_cvt_dig = p_cvt_pow + dig[--y];
+                  accum[0] += p_cvt_dig-&gt;low;
+                  accum[1] += p_cvt_dig-&gt;mid;
+                  accum[2] += p_cvt_dig-&gt;hi;
+                  if (y == 0)
+                    break;
+                  p_cvt_pow += 16;
+                }
+            }
+            {
+              ulong *p_accum = accum;
+              ulong *p_accum_end = accum + 2;
+              const struct div10_S *p_div10;
+              unsigned char carry;
+ 
+              putchar('\n');
+ 
+              /* Ignore high, or high and middle, in accumulator if they are
+              ** zero. */
+              while (!*p_accum_end)
+                if (p_accum_end == accum)
+                  {
+                    /* The number being converted is zero. */
+                    putchar('0');
+                    goto ZERO;
+                  }
+                else
+                  p_accum_end--;
+ 
+              /* Normalize accumulator, placing resulting digits in a
+              ** byte array. */
+              y = 0;
+              carry = 0;
+              for ( ; ; )
+                {
+                  p_div10 = div10 + ((*p_accum &amp; 0xFF) + carry);
+                  <span lang="es-MX">dig[y++] = p_div10-&gt;rem;</span>
+                  carry = p_div10-&gt;div;
+                  if (!(y &amp; 3))
+                    {
+                      p_accum++;
+                      if (p_accum &gt; p_accum_end)
+                        break;
+                    }
+                  else
+                    {
+                      *p_accum &gt;&gt;= 8;
+                      if ((!*p_accum) &amp;&amp; (p_accum == p_accum_end))
+                        break;
+                    }
+                }
+ 
+              /* Output decimal value. */
+              if (carry)
+                putchar(carry + '0');
+              do
+                putchar(dig[--y] + '0');
+              <span lang="es-MX">while</span> <span lang="es-MX">(y);</span>
+ 
+              <span lang="es-MX">ZERO:</span>
+              <span lang="es-MX">putchar('\n');</span>
+            }
+          }
+      }
+    while (c != EOF);
+ 
+    return(0);
+  }</pre><p class="msonormal">
+<br/>
+<br/>
+
+</p>
+<p class="msonormal"><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">23DA
+hex is 9178 decimal.  I tested this solution against the
+straightforward one on my (Pentium-based) PC, and this solution is
+faster.  This solution (when you count the lookup tables) is much
+bigger, so performance is potentially dependent on processor cache
+size.</font></font></font></p>
+<p class="msonormal"><font color="#0000ff"> </font>
+</p>
 </body>
-
 </html>

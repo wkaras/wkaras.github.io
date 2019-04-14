@@ -1,0 +1,84 @@
+<html>
+<body>
+<center><b>C++ Memory Ordering Model</b></center>
+<br>
+<center>Author: Walter Karas (wkaras@yahoo.com)</center>
+<br>
+Indiviual <i>memory events</i> are memory location access starts and ends, fences, thread starts and ends, or some combination
+of these. A memory location access is a load, a store, or both a load and a store.<br><br>
+
+A particular load start or end, or thread start or end are in a single thread execution. All other memory events
+are (nominally) in all thread executions. A thread execution has exactly one start and end in it.<br><br>
+
+A thread execution defines a strict partial ordering of all memory events in it, represented in this document with the
+conventional symbols &lt; and &gt;.<br><br>
+
+All memory events are <i>caused by</i> one thread execution, and are in the thread execution they are caused by. If S is
+the start and E is the end of a thread execution T, there can be no memory event X in T where X &lt; S or X &gt; E.<br><br>
+
+The notation (X, Y) means that the event Y is distinct from event X, in the same thread execution as X, and not Y > X.
+
+For (X, Y), let Z be a memory event in the same thread execution as X and Y, distinct from both of them. If Z < Y but
+not Z < X, or event Z > X but not Z > Y, or there is no pair in the partial ordering relation containing Z and either
+X or Y, then Z <i>overlaps</i> (X, Y). For (U, V) in the same thread execution as (X, Y), with
+all of X, Y, U, V mutually distinct, unless V &lt; X, or Y &lt U, (U, V) and (X, Y) overlap.<br><br>
+
+Every memory location access has a start and end event, For a memory location access A, A end < A start is not true in
+any thread execution the events are in. Thus, a memory location access A can be referred to as (A start, A end).
+If memory accesses A1 and A2 are in the same thread execution, and access the same memory location, they are said to
+overlap if (A1 start, A1 end) and (A2 start, A2 end) overlap.<br><br>
+
+A memory store attempts to store a particular value to a memory location. Let S1 and S2 be two stores to the same memory
+location in the same thread execution. If they overlap they both fail, otherwise they both succeed.<br><br>
+
+If a memory load L overlaps with a store, the result of L is undefined. Suppose S is a store to the same memory location
+as L loads, in the same thread execution thread execution as L, and S end < L start, and there exists no other store S2
+to the same memory location and in the same thread execution where S2 end < L start, but not S2 end < S start. If no
+such S exists, the result of L is undefined. If S failed, the result of L is undefined. Else, if S succeeded, the result
+of L is the value that was stored by S.<br><br>
+
+The partial ordering of the thread execution guarantees that memory accesses to the same memory location caused by the
+thread execution will not overlap.<br><br>
+
+An <i>atomic access</i> of a memory location can be a load, a store, or a combined load and store. A comibined load and
+store must always be atomic. The start and end of a combined load and store are not load start and end events, in
+thread executions that did not cause the combined load and store. Atomic accesses to the same memory location do not overlap
+with each other in any thread execution.<br><br>
+
+A memory event X is <i>live</i> in a thread execution with start S and end E if S < X and X > E.<br><br>
+
+The start of an atomic store may also be <i>partial release fence</i>. If S is a store and F is a partial release fence
+caused by the same thread execution, and S < F, then S < F in all thread executions that both S and F are live in.<br><br>
+
+If F is a (standalone) <i>full release fence</i>, and S is a store caused by the same thread exection that caused F, with
+F < S start, then F < S start in all thread executions that both F and S start are live in. F is also a partial
+release fence.<br><br>
+
+Suppose there is a sequence of atomic loads from the same memory location in a thread execution. Let X be either the end
+of an atomic store to the same memory location, and/or a release fence, in a different thread execution. There must exist
+a finite number N such that, if the sequence is longer than N, there will exist a load L in the sequence, where L start > X
+in the thread execution causing L.<br><br>
+
+There is also a global partial ordering that applies to all thread executions. If X and Y are memory events, and X < Y
+in the global partial ordering, then X < Y in the partial ordering of all thread executions that both X and Y are live
+in.<br><br>
+
+Notes (NB)<br><br>
+
+Each thread execution nominally consists of a total ordering of evaluations. Each thread has unspecified (and optional)
+caching capabilities. (Typically either CPU core registers or their saved contents in task control blocks.) This means
+that reads and writes of the values of objects may or may not correspond to loads and stores of the memory locations for
+the objects. Also, reordering due to the as-if rule, and potential machine instruction execution pipelining, means the
+partial ordering of loads and stores of memory locations caused by the thread execution has no straight-forward
+relationship to the order of evaluations. However, at the "evaluation" of any release fence F, the value of each (lvalue)
+object is known. If some evaluation prior to F wrote a value to an (lvalue) object with memory location M, the thread
+will cause at least one store S (caused by the thread execution) of the value to M, where S end < F. If a store S2
+(caused by the thread executions) stores a different value to M, then either S2 < S (for one or more store S),
+or F < S2.<br><br>
+
+Acquire fences are only involved in the existence of and the partial ordering of memory events in a particular
+thread execution. The details of how a thread execution determines its partial ordering of memory events is
+beyond the scope of this document.<br><br>
+
+</body>
+</html>
