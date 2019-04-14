@@ -1,0 +1,49 @@
+#ifndef CAVL_EX1_H_
+#define CAVL_EX1_H_
+
+/* Abstract AVL Tree Generic Package Example 1.
+** This code is in the public domain.
+** Version: 1.5  Author: Walt Karas
+**
+** This example shows how to use the AVL generic package to create an
+** env facility.  The env facility stores multiple variables with string
+** names and string values, similar to the environment in a UNIX shell.
+*/
+
+/* Tree node, which are allocated in the heap. */
+typedef struct s_node_env_avl
+  {
+    /* Child pointers. */
+    struct s_node_env_avl *gt, *lt;
+
+    /* Value of variable, a nul-terminated string.  Space for the value
+    ** is allocated by a separate call to malloc(). */
+    char *value;
+
+    /* Balance Factor.  Balance factors of -1, 0, 1 are stored as 0, 1, 2. */
+    unsigned char bf;
+
+    /* Nalue of variable, nul-terminated string.  Actual length is variable,
+    ** not 1. */
+    char name[1];
+  }
+node_env_avl;
+
+#undef AVL_UNIQUE
+#define AVL_UNIQUE(X) X ## _env_avl
+
+#undef AVL_HANDLE
+#define AVL_HANDLE node_env_avl *
+
+/* The variable name is the key. */
+#undef AVL_KEY
+#define AVL_KEY const char *
+
+#undef AVL_MAX_DEPTH
+#define AVL_MAX_DEPTH 45
+
+#undef AVL_PRIVATE
+
+#include "cavl_if.h"
+
+#endif /* include once */

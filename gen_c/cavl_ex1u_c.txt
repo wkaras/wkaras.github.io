@@ -1,0 +1,127 @@
+/* Abstract AVL Tree Generic Package Example 1 (usage).
+** This code is in the public domain.
+** Version: 1.5  Author: Walt Karas
+*/
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "cavl_ex1.h"
+
+static avl_env_avl tree = { 0 };
+
+/* Set value of variable. */
+void set_env(const char *name, const char *value)
+  {
+    node_env_avl *n = search_env_avl(&tree, name, AVL_EQUAL);
+
+    if (!n)
+      {
+	/* This variable does not currently exist.  Create a node for it. */
+	n = (node_env_avl *) malloc(sizeof(node_env_avl) + strlen(name));
+	strcpy(n->name, name);
+	insert_env_avl(&tree, n);
+      }
+    else
+      /* Delete current value. */
+      free(n->value);
+
+    if (value)
+      {
+	if (strlen(value) == 0)
+	  value = 0;
+      }
+
+    if (value)
+      {
+	/* Save new value for variable. */
+	n->value = (char *) malloc(strlen(value) + 1);
+	strcpy(n->value, value);
+      }
+    else
+      /* Variable is being set to empty string, which deletes it. */
+      free(remove_env_avl(&tree, name));
+  }
+
+/* Get value of variable. */
+const char *get_env(const char *name)
+  {
+    node_env_avl *n = search_env_avl(&tree, name, AVL_EQUAL);
+
+    return(n ? n->value : "");
+  }
+
+/* Dump environment in ascending order by variable name. */
+void dump_env(void)
+  {
+    iter_env_avl it;
+    node_env_avl *n;
+
+    start_iter_least_env_avl(&tree, &it);
+
+    for (n = get_iter_env_avl(&it); n;
+	 incr_iter_env_avl(&it), n = get_iter_env_avl(&it))
+      printf("%s=%s\n", n->name, n->value);
+  }
+
+/* Clear the environment. */
+void clear_env(void)
+  {
+    iter_env_avl it;
+    node_env_avl *n;
+
+    start_iter_least_env_avl(&tree, &it);
+
+    /* A useful property of this data structure is the ability to do a
+    ** "death march" through it.  Once the iterator (forward or backward)
+    ** has stepped past a node, the node is not accessed again (assuming
+    ** you don't reverse the direction of iteration).  If you are doing
+    ** a final iteration in order to destroy the tree, you can release
+    ** heap memory or other resources allocated by the tree node once the
+    ** iterator has stepped past it.  If you plan to use the AVL tree
+    ** instance again after completing this final iteration, you must
+    ** make it empty (set the root to the null value).
+    */
+
+    for (n = get_iter_env_avl(&it); n; n = get_iter_env_avl(&it))
+      {
+	/* Step iterator past node n. */
+	incr_iter_env_avl(&it);
+
+	/* Release node n's resources. */
+	free(n->value);
+	free(n);
+      }
+
+    /* Make the tree empty. */
+    tree.root = (node_env_avl *) 0;
+
+  }
+
+/* Demo main program. */
+int main(void)
+  {
+    set_env("The", "The value");
+    set_env("quick", "quick value");
+    set_env("brown", "brown value");
+    set_env("fox", "fox value");
+    set_env("jumped", "jumped value");
+    set_env("over", "over value");
+    set_env("the", "the value");
+    set_env("lazy", "lazy value");
+    set_env("dog", "dog value");
+
+    set_env("DOG", "DOG value");
+    set_env("DOG", 0);
+
+    printf("The value of \"dog\" is \"%s\"\n\n", get_env("dog"));
+
+    printf("DUMP\n");
+    dump_env();
+
+    clear_env();
+    dump_env();
+
+    return(0);
+  }

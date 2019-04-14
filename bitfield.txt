@@ -1,0 +1,194 @@
+/* Notes
+** 1.  parameters to these macros may appear multiple times in the
+** macro definition, so do not use expresions with side-effects as
+** actual parameters.
+** 2.  If parameters to these macros are not in the correct range,
+** results are undetermined.
+*/
+
+/* Get the value of the bitfield with the given WIDTH at the offset OFS in
+** the rvalue RV of unsigned integer type UT.
+*/
+#define BF_GET_N(UT, RV, WIDTH, OFS) \
+  (((RV) >> (OFS)) & BF_H_MW(UT, WIDTH))
+
+/* Logically OR the value VAL into lvalue LV after left-bit-shifting it
+** by OFS bits.
+*/
+#define BF_OR_N(LV, OFS, VAL) \
+{ BF_H_OR_N_EXPR(LV, OFS, VAL); }
+
+/* Set the value VAL in the bitfield with the given WIDTH at the offset OFS
+** in the lvalue LV of unsigned integer type UT.
+*/
+#define BF_SET_N(UT, LV, WIDTH, OFS, VAL) \
+{ ((WIDTH) >= (sizeof(UT) * CHAR_BIT)) ? \
+    (*&(LV) = (VAL)) : \
+    (*&(LV) &= ~(BF_H_MW(UT, WIDTH) << (OFS)), \
+     BF_H_OR_N_EXPR(LV, OFS, VAL)); }
+
+/* A "bitfield map structure" is recursively defined as a C/POD struct or
+** union where each member is an array of char or a bitfield map structure.
+** Each array of char represents a bitfield.  The sizeof the array gives
+** the width of the bitfield.  The byte offset of the array from the
+** start of the top-level structure gives the offset of the bitfield.
+*/
+
+/* Get the value of the bitfield in the rvalue RV of unsigned integer type
+** UT corresponding to the field FLD in bitfield map structure MSTRU.
+*/
+#define BF_GET(UT, RV, MSTRU, FLD) \
+  BF_GET_N(UT, RV, BF_H_WIDTH(MSTRU, FLD), BF_H_OFS(MSTRU, FLD))
+
+/* Logically OR the value VAL into value of the bitfield in the rvalue RV of
+** unsigned integer type ** UT corresponding to the field FLD in bitfield map
+** structure MSTRU.
+*/
+#define BF_OR(LV, MSTRU, FLD, VAL) \
+  BF_OR_N(LV, BF_H_OFS(MSTRU, FLD), VAL)
+
+/* Set the value VAL in the bitfield in the rvalue RV of unsigned integer
+** type UT corresponding to the field FLD in bitfield map structure MSTRU.
+*/
+#define BF_SET(UT, LV, MSTRU, FLD, VAL) \
+  BF_SET_N(UT, LV, BF_H_WIDTH(MSTRU, FLD), BF_H_OFS(MSTRU, FLD), VAL)
+
+/* --------------------------------------------------------------------- */
+
+/* "Private" macros, not meant for direct use. */
+
+#include <limits.h>
+
+/* Mask of WIDTH and type UT.
+*/
+#define BF_H_MW(UT, WIDTH) \
+  ((UT) (((WIDTH) >= (sizeof(UT) * CHAR_BIT)) ? \
+         (~ (UT) 0) : ((((UT) 1) << (WIDTH)) - 1)))
+
+/* BF_OR_N as expression not statement.
+*/
+#define BF_H_OR_N_EXPR(LV, OFS, VAL) \
+  (*&(LV) |= ((VAL) << (OFS)))
+
+/* Returns width of bitfield corresponding to char array FLD in bitfield
+** map structure MSTRU.
+*/
+#define BF_H_WIDTH(MSTRU, FLD) \
+  (sizeof(((MSTRU *) 0x100)->FLD))
+
+/* Returns offset of bitfield corresponding to char array FLD in bitfield
+** map structure MSTRU.
+*/
+#define BF_H_OFS(MSTRU, FLD) \
+  ((((MSTRU *) 0x100)->FLD) - ((char *) 0x100))
+
+/* These macros lay out the bit fields with higher offsets at higher
+** significance, but the reverse is also possible.
+*/
+
+/* --------------------------------------------------------------------- */
+
+/* Test code */
+
+typedef struct
+  {
+    union
+      {
+        /* Array of 4 5-bit-wide bitfields (cool eh?). */
+        char fa[4][5];
+
+        struct
+          {
+            char f1[6], f2[14];
+          }
+        sm;
+      }
+    u;
+
+    char f3[12];
+  }
+Map_bf;
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void bail(void)
+  {
+    printf("FAIL\n");
+    exit(1);
+  }
+
+int main(void)
+  {
+    unsigned va[4], v1, v2, v3, i, v;
+
+    v = 0xabcd1234;
+
+    for (i = 0; i < 4; ++i)
+      va[i] = BF_GET(unsigned, v, Map_bf, u.fa[i]);
+    v3 = BF_GET(unsigned, v, Map_bf, f3);
+
+    if (v != 0xabcd1234)
+      bail();
+
+    v = 0x1234abcd;
+
+    for (i = 0; i < 4; ++i)
+      BF_SET(unsigned, v, Map_bf, u.fa[i], va[i])
+    BF_SET(unsigned, v, Map_bf, f3, v3);
+
+    if (v != 0xabcd1234)
+      bail();
+
+    v = 0xabcd1234;
+
+    v1 = BF_GET(unsigned, v, Map_bf, u.sm.f1);
+    v2 = BF_GET(unsigned, v, Map_bf, u.sm.f2);
+    v3 = BF_GET(unsigned, v, Map_bf, f3);
+
+    if (v != 0xabcd1234)
+      bail();
+
+    v = 0x1234abcd;
+
+    BF_SET(unsigned, v, Map_bf, u.sm.f1, v1)
+    BF_SET(unsigned, v, Map_bf, u.sm.f2, v2)
+    BF_SET(unsigned, v, Map_bf, f3, v3)
+
+    if (v != 0xabcd1234)
+      bail();
+
+    v = 0xabcd1234;
+
+    for (i = 0; i < 4; ++i)
+      va[i] = BF_GET(unsigned, v, Map_bf, u.fa[i]);
+    v3 = BF_GET(unsigned, v, Map_bf, f3);
+
+    v = 0;
+
+    for (i = 0; i < 4; ++i)
+      BF_OR(v, Map_bf, u.fa[i], va[i])
+    BF_OR(v, Map_bf, f3, v3)
+
+    if (v != 0xabcd1234)
+      bail();
+
+    v = 0xabcd1234;
+
+    v1 = BF_GET(unsigned, v, Map_bf, u.sm.f1);
+    v2 = BF_GET(unsigned, v, Map_bf, u.sm.f2);
+    v3 = BF_GET(unsigned, v, Map_bf, f3);
+
+    v = 0;
+
+    BF_OR(v, Map_bf, u.sm.f1, v1)
+    BF_OR(v, Map_bf, u.sm.f2, v2)
+    BF_OR(v, Map_bf, f3, v3)
+
+    if (v != 0xabcd1234)
+      bail();
+
+    printf("SUCCESS\n");
+
+    return(0);
+  }

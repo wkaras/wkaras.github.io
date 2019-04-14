@@ -1,0 +1,75 @@
+// This code is in the public domain.
+// Author:  Walt Karas
+
+// Provides the macros ENUM_DEFINE and ENUM_LOOKUP for defining
+// enums and static lookup tables from the enum values.  To avoid
+// name conflicts, don't declare names that begin with ENUM_ or
+// end with _enum_.  Names declared in this file that end with _
+// are "private".
+
+#ifndef ENUM_HPP_
+#define ENUM_HPP_
+
+// Defines a enum whose name is NAME.  LIST must be the name of
+// a parameterless macro of the form:
+// #define ABC_LIST(E, S) E(N1) S E(N2) S ... S E(Nm)
+// where N1, N2, ... Nm are the names of the enum elements.
+//
+// Example Usage:
+// #define COLOR_LIST(EL, SEP) \
+// EL(Color_red) SEP EL(Color_green) SEP EL(Color_blue)
+// ENUM_DEFINE(Color, COLOR_LIST)
+// 
+// equivalent to:
+// enum Color { Color_red, Color_green, Color_blue };
+//
+#define ENUM_DEFINE(NAME, LIST) \
+enum NAME { LIST(ENUM_DEFINE_AUX_, ENUM_COMMA_) , NAME##_num_elems };
+
+// Defines a const array whose name is LOOKUP_NAME.  The type of the array
+// elements is RESULT_TYPE.  ENUM_NAME and ENUM_LIST must be the NAME
+// and LIST parameters passed to a preceeding invocation of ENUM_DEFINE.
+// LOOKUP_LIST must be a parameterless macro of the form:
+// #define ABC_LIST(E, S) E(N1, V1) S E(N2, V2) S ... S E(Nm, Vm)
+// where each Ni is the name of an element of the enum ENUM_NAME, and
+// Vi is the value to be given to array element LOOKUP_NAME[Ni].  The
+// enum element names don't have to be in the same order in LOOKUP_LIST
+// as they are in ENUM_LIST.  A (cryptic) compiler error will result
+// if any enum element names are missing from LOOKUP_LIST.
+//
+// Example Usage (based on ENUM_DEFINE example):
+// #define COLOR_STR_LIST(E, S) \
+// E(Color_green, "Green") S E(Color_blue, "Blue") S E(Color_red, "Red)
+// ENUM_LOOKUP(Color, COLOR_LIST, Color_str, char *, COLOR_STR_LIST
+//
+// equivalent to:
+// const char *Color_str[] = { "Red", "Green", "Blue" };
+// 
+#define ENUM_LOOKUP( \
+  ENUM_NAME, ENUM_LIST, LOOKUP_NAME, RESULT_TYPE, LOOKUP_LIST) \
+namespace LOOKUP_NAME##_enum_ { \
+typedef RESULT_TYPE Result_type; \
+template<ENUM_NAME E> struct V; \
+LOOKUP_LIST(ENUM_LOOKUP_AUX1_, ENUM_EMPTY_) \
+const RESULT_TYPE lookup[] = \
+  { ENUM_LIST(ENUM_LOOKUP_AUX2_, ENUM_COMMA_) }; } \
+const RESULT_TYPE * const LOOKUP_NAME = LOOKUP_NAME##_enum_::lookup;
+
+/////////////////////// Begin Private Stuff ////////////////////////
+
+// Some compilers don't like empty macro paramters, but all are happy
+// with a macro that evaluates to nothing.
+#define ENUM_EMPTY_
+
+// Useful for passing a comma as a parameter to a macro.
+#define ENUM_COMMA_ ,
+
+#define ENUM_DEFINE_AUX_(ELEM) ELEM
+
+#define ENUM_LOOKUP_AUX1_(ELEM, RESULT) \
+template<> struct V<ELEM> \
+  { static const Result_type Val = (RESULT); };
+
+#define ENUM_LOOKUP_AUX2_(ELEM) V<ELEM>::Val
+
+#endif

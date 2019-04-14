@@ -1,0 +1,88 @@
+/* Portable Spinlock Code.
+** This code is in the public domain.
+** Author:  Walt Karas
+**
+** WARNING:  This code has not been tested in any way.
+*/
+
+#ifndef SPINLOCK_H_
+#define SPINLOCK_H_
+
+/* Number of processors. */
+#define SPINLOCK_NUM_PROCS 8
+
+/* Type of variable to hold a processor number from 0 to
+** (SPINLOCK_NUM_PROCS - 1).  Must be unsigned char or unsigned int
+** of some size.  A write of a variable of this type in the memory
+** shared by all the processors must be indivisible.  That is, it
+** can't consist of multiple steps that could potentially be
+** interleaved with operations by another processor.  For example,
+** on an architecture (like the early MIPS) with no byte load/store
+** instructions, this type could not be unsigned char.  In this case,
+** reading a byte would consist of multiple instructions to read a
+** larger unit containing the byte, change the byte, and write back
+** the larger unit.  If another processor tried to change a different
+** byte in the same larger unit (which is exactly the scenario
+** likely to be caused by the spinlock implemntation), one processor
+** could erase the change made by the other.
+*/
+typedef unsigned char spinlock_proc_num;
+
+/* Special value of type spinlock_proc_num, indicating none of the
+** processors.
+*/
+#define SPINLOCK_NO_PROC ((spinlock_proc_num) ~ (spinlock_proc_num) 0)
+
+/* The fields of the spinlock structure should be treated as private.
+** A spinlock has to reside entirely in memory that is shared by all
+** the processors.
+*/
+typedef struct
+  {
+    spinlock_proc_num has_lock;
+
+    /* The per-processor flag variables are only ever set to 0 or 1.
+    ** The spinlock_proc_num type is used because it's selected to
+    ** avoid one processor overwriting another.
+    */
+    spinlock_proc_num flag[SPINLOCK_NUM_PROCS];
+  }
+spinlock;
+
+/* Initialize spinlock structure before it is used in any way.
+** (Initialized to the unlocked state.)
+*/
+void spinlock_init(spinlock *sl);
+
+/* Tries to get spinlock.  Returns non-zero if got spinlock, 0
+** otherwise.
+*/
+int spinlock_try(
+  /* Spinlock to get. */
+  volatile spinlock *sl,
+  /* Number of the procesor calling this function. */
+  spinlock_proc_num p_num);
+
+/* Busy wait to get spinlock.
+*/
+void spinlock_wait(
+  /* Spinlock to get. */
+  volatile spinlock *sl,
+  /* Number of the procesor calling this function. */
+  spinlock_proc_num p_num);
+
+/* Release the spinlock.  Does nothing if the calling processor does
+** not have the spinlock.
+*/
+void spinlock_release(
+  /* Spinlock to release. */
+  volatile spinlock *sl,
+  /* Number of the procesor calling this function. */
+  spinlock_proc_num p_num);
+
+/* Returns the number of the processor that has the given spinlock, or
+** SPINLOCK_NO_PROC if no processor currently has the spinlock.
+*/
+spinlock_proc_num spinlock_who(volatile spinlock *sl);
+
+#endif /* Include once. */

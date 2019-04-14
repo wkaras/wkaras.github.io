@@ -1,0 +1,755 @@
+// Copyright (C) 2001 Walter William Karas.  Distribute freely, do not
+// remove this notice.  If you distribute this file with changes, note
+// that you made changes immediately below.
+
+#using <mscorlib.dll>
+#using <System.dll>
+#using <System.Windows.Forms.dll>
+#using <System.Drawing.dll>
+
+using namespace System::ComponentModel;
+using namespace System::Windows::Forms;
+using namespace System::Drawing;
+using namespace System;
+
+#define NDEBUG
+
+#ifdef NDEBUG
+
+#define WR(VAL)
+#define WRLN(VAL)
+#define CNT
+
+#else
+
+#define WR(VAL) Console::Write(VAL);
+#define WRLN(VAL) Console::WriteLine(VAL);
+
+namespace
+{
+void consoleOutputCount(void)
+  {
+    static int i = 0;
+    i++;
+    WR(i)
+    WR(" ")
+  }
+}
+
+#define CNT consoleOutputCount();
+
+#endif
+
+typedef Drawing::Size RectSize;
+
+__gc public class MemGameMainForm : public Form
+  {
+  private:
+
+    __gc class AboutBox : public Form
+      {
+      private:
+
+	void okClicked(Object *pSender, EventArgs *pArgs)
+	  { Close(); }
+
+      public:
+
+	AboutBox(void)
+	  {
+	    Text = S"About Memory Game";
+	    FormBorderStyle = FormBorderStyle::Fixed3D;
+	    Size = RectSize(300, 170);
+	    MaximizeBox = false;
+	    MinimizeBox = false;
+
+	    Label *lab = new Label();
+	    lab->Text = "Memory matching game";
+	    lab->Size = RectSize(lab->PreferredWidth, lab->PreferredHeight);
+	    lab->Location = Point(20, 30);
+	    Controls->Add(lab);
+
+	    lab = new Label();
+	    lab->Text = "Executable is in the public domain";
+	    lab->Size = RectSize(lab->PreferredWidth, lab->PreferredHeight);
+	    lab->Location = Point(20, 60);
+	    Controls->Add(lab);
+
+	    lab = new Label();
+	    lab->Text = "Version:  1.1   Author:  Walt Karas";
+	    lab->Size = RectSize(lab->PreferredWidth, lab->PreferredHeight);
+	    lab->Location = Point(20, 90);
+	    Controls->Add(lab);
+
+	    Button *ok = new Button;
+	    ok->Text = S"OK";
+	    ok->Size = RectSize(40, 25);
+	    ok->Location = Point(240, 105);
+	    ok->Click += new EventHandler(this, &AboutBox::okClicked);
+	    Controls->Add(ok);
+	  }
+      };
+
+    // Form to change number of tiles in x, y direction.
+    __gc class ChangeGame : public Form
+      {
+      private:
+
+ 	bool canceled_;
+
+	NumericUpDown *numXTCntl, *numYTCntl;
+
+	void cancelClicked(Object *pSender, EventArgs *pArgs)
+	  { Close(); }
+
+	void restartGameClicked(Object *pSender, EventArgs *pArgs)
+	  { canceled_ = false; Close(); }
+
+      public:
+
+	ChangeGame(int currNumXT, int currNumYT) : canceled_(true)
+	  {
+	    Text = S"Change Game";
+	    FormBorderStyle = FormBorderStyle::Fixed3D;
+	    Size = RectSize(220, 190);
+	    MaximizeBox = false;
+
+	    Label *lab = new Label();
+	    lab->Text = "Number of rows";
+	    lab->Size = RectSize(lab->PreferredWidth, lab->PreferredHeight);
+	    lab->Location = Point(20, 30);
+	    Controls->Add(lab);
+
+	    numYTCntl = new NumericUpDown();
+	    numYTCntl->Maximum = 30;
+	    numYTCntl->Minimum = 2;
+	    numYTCntl->Location = Point(130, 30);
+	    numYTCntl->Width = 40;
+	    numYTCntl->Value = currNumYT;
+	    Controls->Add(numYTCntl);
+
+	    lab = new Label();
+	    lab->Text = "Number of colums";
+	    lab->Size = RectSize(lab->PreferredWidth, lab->PreferredHeight);
+	    lab->Location = Point(20, 60);
+	    Controls->Add(lab);
+
+	    numXTCntl = new NumericUpDown();
+	    numXTCntl->Maximum = 30;
+	    numXTCntl->Minimum = 2;
+	    numXTCntl->Location = Point(130, 60);
+	    numXTCntl->Width = 40;
+	    numXTCntl->Value = currNumXT;
+	    Controls->Add(numXTCntl);
+
+	    Button *btn = new Button;
+	    btn->Text = S"Restart Game";
+	    btn->Size = RectSize(90, 25);
+	    btn->Location = Point(20, 105);
+	    btn->Click +=
+	      new EventHandler(this, &ChangeGame::restartGameClicked);
+	    Controls->Add(btn);
+
+	    btn = new Button;
+	    btn->Text = S"Cancel";
+	    btn->Size = RectSize(50, 25);
+	    btn->Location = Point(130, 105);
+	    btn->Click +=
+	      new EventHandler(this, &ChangeGame::cancelClicked);
+	    Controls->Add(btn);
+	  }
+
+	int numXTiles(void) { return((int) (numXTCntl->Value)); }
+
+	int numYTiles(void) { return((int) (numYTCntl->Value)); }
+
+	bool canceled(void) { return(canceled_); }
+
+      };
+
+    void actAboutMenuItem(Object *pSender, EventArgs *pArgs)
+      { (new AboutBox)->ShowDialog(); }
+
+    void actRestartGameMenuItem(Object *pSender, EventArgs *pArgs)
+      { restartGameSameDimensions(); }
+
+    void actChangeGameMenuItem(Object *pSender, EventArgs *pArgs)
+      { 
+	ChangeGame *chG =
+	  new ChangeGame(layout->numXTiles(), layout->numYTiles());
+	chG->ShowDialog();
+	if (!(chG->canceled()))
+	  restartGame(chG->numXTiles(), chG->numYTiles());
+      }
+
+    void actExit(Object *pSender, EventArgs *pArgs)
+      { Application::Exit(); }
+
+    void playAgainClicked(Object *pSender, EventArgs *pArgs)
+      { restartGameSameDimensions(); }
+
+    void setupMenu(void)
+      {
+	MenuItem *fileMenu, *menuItem;
+
+	fileMenu = new MenuItem("&File");
+
+	menuItem = new MenuItem("&Restart Game");
+	menuItem->Click +=
+	  new EventHandler(this, &MemGameMainForm::actRestartGameMenuItem);
+	fileMenu->MenuItems->Add(menuItem);
+
+	menuItem = new MenuItem("&Change Game...");
+	menuItem->Click +=
+	  new EventHandler(this, &MemGameMainForm::actChangeGameMenuItem);
+	fileMenu->MenuItems->Add(menuItem);
+
+	menuItem = new MenuItem("&About...");
+	menuItem->Click +=
+	  new EventHandler(this, &MemGameMainForm::actAboutMenuItem);
+	fileMenu->MenuItems->Add(menuItem);
+
+	menuItem = new MenuItem("E&xit");
+	menuItem->Click +=
+	  new EventHandler(this, &MemGameMainForm::actExit);
+	fileMenu->MenuItems->Add(menuItem);
+
+	MainMenu *menuBar = new MainMenu;
+	menuBar->MenuItems->Add(fileMenu);
+
+	Menu = menuBar;
+      }
+
+    __value enum ColorNum
+      {
+	PINK,
+	BACKGROUND_COLOR_NUM = PINK,
+	BLACK,
+	COVER_COLOR_NUM = BLACK,
+	BROWN,
+	FIRST_TILE_COLOR_NUM = BROWN,
+	BLUE,
+	PURPLE,
+	GREEN,
+	RED,
+	YELLOW,
+	ORANGE,
+	WHITE,
+
+	NUM_COLORS
+      };
+
+    __gc class TileLayout
+      {
+      // Point instances used by this class give x and y relative
+      // tile numbers, not pixel positions.
+
+      // "Tile Locations" are numbered left-to-right, then top-to-bottom,
+      // starting from zero.
+
+      private:
+
+	__value enum bill_gates_you_wanker
+	  {
+	    COVER_MASK = 0x1000,
+	    BACK_CN = MemGameMainForm::BACKGROUND_COLOR_NUM,
+	    COVER_CN = MemGameMainForm::COVER_COLOR_NUM,
+	    FIRST_TILE_CN = MemGameMainForm::FIRST_TILE_COLOR_NUM,
+	    NUM_C = MemGameMainForm::NUM_COLORS
+	  };
+
+	int numXTiles_, numYTiles_;
+
+	// Array of tile statuses (in heap), indexed by tile location.
+	int *tileStatus;
+
+	int numNotCleared;
+
+	int tileLoc(Point &tileCoord)
+	  { return((tileCoord.Y * numXTiles_) + tileCoord.X); }
+
+      public:
+
+	TileLayout(int numXT, int numYT)
+	  : numXTiles_(numXT), numYTiles_(numYT)
+	  {
+	    int numLocs = numXTiles_ * numYTiles_;
+
+	    tileStatus = new int [numLocs];
+	    if (tileStatus == 0)
+	      Application::Exit();
+
+	    if (numLocs & 1)
+	      {
+		// Discard one location so that locations can be paired.
+		numLocs--;
+		tileStatus[numLocs] = BACK_CN;
+	      }
+
+	    numNotCleared = numLocs;
+
+	    int *pick = new int [numLocs];
+	    if (pick == 0)
+	      Application::Exit();
+
+	    int i, j;
+	    for (i = 0; i < numLocs; i++)
+	      pick[i] = i;
+
+	    Random *rand = new Random;
+	    int cN = FIRST_TILE_CN;
+	    while (numLocs > 0)
+	      {
+		i = (int) (rand->NextDouble() * numLocs);
+		numLocs--;
+		j = pick[i];
+		pick[i] = pick[numLocs];
+		tileStatus[j] = cN | COVER_MASK;
+
+		// Change the color every other time through the
+		// loop, to make sure there's always a pair.
+		if (!(numLocs & 1))
+		  {
+		    cN++;
+		    if (cN == NUM_C)
+		      cN = FIRST_TILE_CN;
+		  }
+	      }
+
+	    delete [] pick;
+	  }
+
+	~TileLayout(void) { delete [] tileStatus; }
+
+	int numXTiles(void) { return(numXTiles_); }
+	int numYTiles(void) { return(numYTiles_); }
+
+	int colorNum(Point &tileCoord)
+	  {
+	    int stat = tileStatus[tileLoc(tileCoord)];
+	    return((stat & COVER_MASK) ? COVER_CN : stat);
+	  }
+
+	void cover(Point &tileCoord)
+	  { tileStatus[tileLoc(tileCoord)] |= COVER_MASK; }
+
+	void uncover(Point &tileCoord)
+	  { tileStatus[tileLoc(tileCoord)] &= ~COVER_MASK; }
+
+	void clear(Point &tileCoord)
+	  {
+	    int &tS = tileStatus[tileLoc(tileCoord)];
+	    if (tS != BACK_CN)
+	      {
+		tS = BACK_CN;
+		numNotCleared--;
+	      }
+	  }
+
+	bool isCovered(Point &tileCoord)
+	  { return((tileStatus[tileLoc(tileCoord)] & COVER_MASK) != 0); }
+
+	bool isCleared(Point &tileCoord)
+	  { return(tileStatus[tileLoc(tileCoord)] == BACK_CN); }
+
+	bool allCleared(void) { return(numNotCleared == 0); }
+      };
+
+    TileLayout *layout;
+
+    // Array of brushes, one for each color.
+    SolidBrush *brush[];
+
+    // Variables defining geometry.
+    Point upperLeftOfUpperLeftTile;
+    RectSize tileSize;
+    int xTileSep, yTileSep;
+
+    // These Points contain tile coordinates, not pixel coordinates.
+    Point firstTile, secondTile;
+
+    __value enum GameState
+      {
+	PICK_FIRST_TILE,
+	PICK_SECOND_TILE,
+	LOOK_AT_PICKS,
+	GAME_OVER
+      };
+
+    GameState gameState;
+
+    // Label in main window.
+    Label *mainLabel;
+
+    // Buttons in main window after winning.
+    Button *playAgainButton;
+    Button *exitButton;
+
+    // Display correct main label for state.
+    void labelForState(void)
+      {
+	switch (gameState)
+	  {
+	  case PICK_FIRST_TILE:
+	    mainLabel->Text =
+	      "Move the mouse to the first tile, then click on it.";
+	    break;
+	  case PICK_SECOND_TILE:
+	    mainLabel->Text =
+	      "Move the mouse to the second tile, then click on it.";
+	    break;
+	  case LOOK_AT_PICKS:
+	    mainLabel->Text =
+	      layout->colorNum(firstTile) == layout->colorNum(secondTile) ?
+	      "A match!  Click mouse anywhere to continue." :
+	      "Sorry, not a match.  Click mouse anywhere to continue.";
+	    break;
+	  case GAME_OVER:
+	    mainLabel->Text = "You Won!";
+	    break;
+	  }
+
+	mainLabel->Size =
+	  RectSize(mainLabel->PreferredWidth, mainLabel->PreferredHeight);
+      }
+
+    void setGameState(GameState newState)
+      {
+	gameState = newState;
+	labelForState();
+      }
+
+    // Does not do screen paint.
+    void startOrRestart(int numXT, int numYT)
+      {
+	bool propigateDimensions = true;
+
+	if (layout)
+	  {
+	    // Previous layout exists, must be restarting game.
+	    propigateDimensions =
+	      (numXT != layout->numXTiles()) || (numYT != layout->numYTiles());
+
+	    delete layout;
+	  }
+
+	layout = new TileLayout(numXT, numYT);
+
+	if (propigateDimensions)
+	  {
+	    // cS is optimal size of clent portion of form.
+	    RectSize cS(
+	      upperLeftOfUpperLeftTile.X +
+	      (layout->numXTiles() * (tileSize.Width + xTileSep)),
+	      upperLeftOfUpperLeftTile.Y +
+	      (layout->numYTiles() * (tileSize.Height + yTileSep)));
+
+	    // Allow room for Controls.
+	    if (cS.Width < 600)
+	      cS.Width = 600;
+
+	    AutoScroll = true;
+	    AutoScrollMinSize = RectSize(cS.Width - 1, cS.Height - 1);
+
+	    RectSize scrSz = Screen::FromControl(this)->Bounds.Size;
+	    scrSz.Width -= 100;
+	    scrSz.Height -= 100;
+
+	    if (cS.Width > scrSz.Width)
+	      cS.Width = scrSz.Width;
+	    if (cS.Height > scrSz.Height)
+	      cS.Height = scrSz.Height;
+
+	    ClientSize = cS;
+	  }
+
+	setGameState(PICK_FIRST_TILE);
+      }
+
+    // Does screen paint.
+    void restartGame(int numXT, int numYT)
+      {
+	if (gameState == GAME_OVER)
+	  {
+	    Controls->Remove(playAgainButton);
+	    Controls->Remove(exitButton);
+	  }
+
+	startOrRestart(numXT, numYT);
+	Graphics *pg = CreateGraphics();
+	pg->FillRectangle(brush[BACKGROUND_COLOR_NUM], ClientRectangle);
+	PaintEventArgs *e = new PaintEventArgs(pg, ClientRectangle);
+	OnPaint(e);
+	pg->Dispose();
+      }
+
+    void restartGameSameDimensions(void)
+      { restartGame(layout->numXTiles(), layout->numYTiles()); }
+
+    void setupGraphics(void)
+      {
+	brush = new SolidBrush *[NUM_COLORS];
+
+        brush[PINK] = new SolidBrush(Color::Pink);
+        brush[BLACK] = new SolidBrush(Color::Black);
+        brush[BROWN] = new SolidBrush(Color::Brown);
+        brush[BLUE] = new SolidBrush(Color::Blue);
+        brush[PURPLE] = new SolidBrush(Color::Purple);
+        brush[GREEN] = new SolidBrush(Color::Green);
+        brush[RED] = new SolidBrush(Color::Red);
+        brush[YELLOW] = new SolidBrush(Color::Yellow);
+        brush[ORANGE] = new SolidBrush(Color::Orange);
+        brush[WHITE] = new SolidBrush(Color::White);
+
+	upperLeftOfUpperLeftTile = Point(10, 40);
+	tileSize = RectSize(50, 50);
+	xTileSep = 10;
+	yTileSep = 10;
+
+	layout = 0;
+
+	mainLabel = 0;
+
+	mainLabel = new Label();
+	mainLabel->Location = Point(10, 10);
+	System::Drawing::Font *nf =
+	  new System::Drawing::Font(mainLabel->Font->FontFamily, 16);
+	mainLabel->Font = nf;
+	mainLabel->ForeColor = Color::Blue;
+
+	playAgainButton = new Button;
+	playAgainButton->Text = S"Play Again";
+	playAgainButton->Size = RectSize(80, 25);
+	playAgainButton->Location = Point(10, 40);
+	playAgainButton->BackColor = Color::White;
+	playAgainButton->Click +=
+	  new EventHandler(this, &MemGameMainForm::playAgainClicked);
+
+	exitButton = new Button;
+	exitButton->Text = S"Exit";
+	exitButton->Size = RectSize(40, 25);
+	exitButton->Location = Point(100, 40);
+	exitButton->BackColor = Color::White;
+	exitButton->Click +=
+	  new EventHandler(this, &MemGameMainForm::actExit);
+
+	// This function depends on variables set prior to call.
+	startOrRestart(7, 6);
+
+	Controls->Add(mainLabel);
+      }
+
+    // Adust rectangle from absolute coordinates to client area
+    // coordinates.  If none of rectangle is visible in client area,
+    // set size property to (0, 0) and return false.
+    bool adjustRectangle(Rectangle &r)
+      {
+	Point offset = AutoScrollPosition;
+	Point uL = r.Location;
+	// One pixel to the right and below the lower right.
+	Point lR = uL + r.Size;
+
+	uL = uL + offset;
+	lR = lR + offset;
+
+	if (uL.X < 0)
+	  uL.X = 0;
+	if (uL.Y < 0)
+	  uL.Y = 0;
+
+	RectSize cS = ClientSize;
+
+	if (lR.X > cS.Width)
+	  lR.X = cS.Width;
+	if (lR.Y > cS.Height)
+	  lR.Y = cS.Height;
+
+	if ((uL.X >= cS.Width) || (uL.Y >= cS.Height) ||
+	    (lR.X <= 0) || (lR.Y <= 0))
+	  {
+	    r.Size = RectSize(0, 0);
+	    return(false);
+	  }
+
+	r.Location = uL;
+	r.Size = RectSize(lR.X - uL.X,  lR.Y - uL.Y);
+
+	return(true);
+      }
+
+    // Note: x, y tile numbers are zero-base.
+
+    bool tileClientRectangle(Point &tileCoord, Rectangle &r)
+      {
+	r.Location =
+	  upperLeftOfUpperLeftTile +
+	  RectSize(tileCoord.X * (tileSize.Width + xTileSep),
+	           tileCoord.Y * (tileSize.Height + yTileSep));
+	r.Size = tileSize;
+	return(adjustRectangle(r));
+      }
+
+    void paintForm(Object *pSender, PaintEventArgs *pe)
+      {
+        if (gameState == GAME_OVER)
+	  return;
+
+	Graphics *pg = pe->Graphics;
+	Rectangle r;
+	// Tile coordinates, not pixel points.
+	Point tC, tCUpperLeftVisible, tCLowerRightVisible;
+
+	int top, bottom, left, right;
+
+	top = -AutoScrollPosition.Y - upperLeftOfUpperLeftTile.Y;
+	left = -AutoScrollPosition.X - upperLeftOfUpperLeftTile.X;
+	bottom = top + ClientRectangle.Height - 1;
+	right = left + ClientRectangle.Width - 1;
+
+	if ((bottom < 0) || (right < 0))
+	  return;
+
+	if (left < 0)
+	  left = 0;
+	if (top < 0)
+	  top = 0;
+
+	tCUpperLeftVisible.X = left / (tileSize.Width + xTileSep);
+	if ((left % (tileSize.Width + xTileSep)) >= tileSize.Width)
+	  tCUpperLeftVisible.X++;
+
+	tCUpperLeftVisible.Y = top / (tileSize.Height + yTileSep);
+	if ((top % (tileSize.Height + yTileSep)) >= tileSize.Height)
+	  tCUpperLeftVisible.Y++;
+
+	tCLowerRightVisible.X = right / (tileSize.Width + xTileSep);
+	if (tCLowerRightVisible.X >= layout->numXTiles())
+	  tCLowerRightVisible.X = layout->numXTiles() - 1;
+
+	tCLowerRightVisible.Y = bottom / (tileSize.Height + yTileSep);
+	if (tCLowerRightVisible.Y >= layout->numYTiles())
+	  tCLowerRightVisible.Y = layout->numYTiles() - 1;
+
+	for (tC.X = tCUpperLeftVisible.X; tC.X <= tCLowerRightVisible.X;
+	     tC.X++)
+	  for (tC.Y = tCUpperLeftVisible.Y; tC.Y <= tCLowerRightVisible.Y;
+	       tC.Y++)
+	    {
+	      if (!(layout->isCleared(tC)))
+		{
+		  tileClientRectangle(tC, r);
+		  pg->FillRectangle(brush[layout->colorNum(tC)], r);
+		}
+	    }
+      }
+
+    // Returns false if click was not over any tile.
+    bool whichTile(Point &click, Point &tileCoord)
+      {
+	click = click - upperLeftOfUpperLeftTile;
+	if ((click.X >= 0) && (click.Y >= 0))
+	  {
+	    int xMod = click.X % (tileSize.Width + xTileSep);
+	    int yMod = click.Y % (tileSize.Height + yTileSep);
+	    if ((xMod < tileSize.Width) && (yMod < tileSize.Height))
+	      {
+		tileCoord.X = click.X / (tileSize.Width + xTileSep);
+		tileCoord.Y = click.Y / (tileSize.Height + yTileSep);
+		return((tileCoord.X < layout->numXTiles()) &&
+		       (tileCoord.Y < layout->numYTiles()));
+	      }
+	  }
+	return(false);
+      }
+
+    void clickMe(Object *pSender, MouseEventArgs *pe)
+      {
+        if (gameState == GAME_OVER)
+	  return;
+
+	Point clicked = Point(pe->X, pe->Y) - AutoScrollPosition;
+	Point tileCoord;
+	Rectangle r;
+
+	Graphics *pg = CreateGraphics();
+	if (gameState == LOOK_AT_PICKS)
+	  {
+	    // Doesn't matter where mouse was when clicked.
+	    if (layout->colorNum(firstTile) == layout->colorNum(secondTile))
+	      {
+		// Got a match, clear the tiles.
+		layout->clear(firstTile);
+		if (tileClientRectangle(firstTile, r))
+		  pg->FillRectangle(brush[BACKGROUND_COLOR_NUM], r);
+		layout->clear(secondTile);
+		if (tileClientRectangle(secondTile, r))
+		  pg->FillRectangle(brush[BACKGROUND_COLOR_NUM], r);
+	      }
+	    else
+	      {
+		layout->cover(firstTile);
+		if (tileClientRectangle(firstTile, r))
+		  pg->FillRectangle(brush[COVER_COLOR_NUM], r);
+		layout->cover(secondTile);
+		if (tileClientRectangle(secondTile, r))
+		  pg->FillRectangle(brush[COVER_COLOR_NUM], r);
+	      }
+
+	    if (layout->allCleared())
+	      {
+		setGameState(GAME_OVER);
+		AutoScrollPosition = Point(0, 0);
+		Controls->Add(playAgainButton);
+		Controls->Add(exitButton);
+	      }
+	    else
+	      setGameState(PICK_FIRST_TILE);
+	  }
+	else if (whichTile(clicked, tileCoord) &&
+		 !(layout->isCleared(tileCoord)) &&
+		 layout->isCovered(tileCoord))
+	  {
+	    layout->uncover(tileCoord);
+	    tileClientRectangle(tileCoord, r);
+	    pg->FillRectangle(brush[layout->colorNum(tileCoord)], r);
+	    if (gameState == PICK_FIRST_TILE)
+	      {
+		firstTile = tileCoord;
+		setGameState(PICK_SECOND_TILE);
+	      }
+	    else
+	      {
+		secondTile = tileCoord;
+		setGameState(LOOK_AT_PICKS);
+	      }
+	  }
+	pg->Dispose();
+      }
+
+  public:
+
+    MemGameMainForm(void)
+      {
+	BackColor = Color::Pink;
+	Text = S"Memory Game";
+
+	setupMenu();
+	setupGraphics();
+
+	Paint += new PaintEventHandler(this, &MemGameMainForm::paintForm);
+	MouseDown += new MouseEventHandler(this, &MemGameMainForm::clickMe);
+      }
+  };
+
+#ifdef NDEBUG
+void WinMain(void)
+#else
+int main(void)
+#endif
+  {
+    Application::Run(new MemGameMainForm());
+
+    #ifndef NDEBUG
+    return(0);
+    #endif
+  }

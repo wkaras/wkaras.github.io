@@ -1,0 +1,3461 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="cavl_tree_files/filelist.xml">
+<title>C AVL Tree &quot;Generic Package&quot;</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Subject>C AVL Tree Generic Package</o:Subject>
+  <o:Author>Walt Karas</o:Author>
+  <o:Keywords>C Template AVL Balanced Binary Search Tree Data Structure</o:Keywords>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor> </o:LastAuthor>
+  <o:Revision>135</o:Revision>
+  <o:TotalTime>2022</o:TotalTime>
+  <o:Created>2002-08-15T18:23:00Z</o:Created>
+  <o:LastSaved>2003-08-16T14:55:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>3710</o:Words>
+  <o:Characters>21149</o:Characters>
+  <o:Manager>none</o:Manager>
+  <o:Company>self</o:Company>
+  <o:Lines>176</o:Lines>
+  <o:Paragraphs>49</o:Paragraphs>
+  <o:CharactersWithSpaces>24810</o:CharactersWithSpaces>
+  <o:Version>10.3311</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.3in;
+	text-indent:-.3in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l14 level1 lfo2;
+	tab-stops:list .3in;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-link:"Heading 2 Char";
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.4in;
+	text-indent:-.4in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	mso-list:l14 level2 lfo2;
+	tab-stops:list .4in;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.5in;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	mso-list:l14 level3 lfo2;
+	tab-stops:list .5in;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.6in;
+	text-indent:-.6in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	mso-list:l14 level4 lfo2;
+	tab-stops:list .6in;
+	font-size:14.0pt;
+	font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.7in;
+	text-indent:-.7in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	mso-list:l14 level5 lfo2;
+	tab-stops:list .7in;
+	font-size:13.0pt;
+	font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.8in;
+	text-indent:-.8in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	mso-list:l14 level6 lfo2;
+	tab-stops:list .8in;
+	font-size:11.0pt;
+	font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.9in;
+	text-indent:-.9in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	mso-list:l14 level7 lfo2;
+	tab-stops:list .9in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:1.0in;
+	text-indent:-1.0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	mso-list:l14 level8 lfo2;
+	tab-stops:list 1.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:1.1in;
+	text-indent:-1.1in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	mso-list:l14 level9 lfo2;
+	tab-stops:list 1.1in;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoList, li.MsoList, div.MsoList
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoListNumber, li.MsoListNumber, div.MsoListNumber
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoListNumber2, li.MsoListNumber2, div.MsoListNumber2
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoListContinue3, li.MsoListContinue3, div.MsoListContinue3
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:.75in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-link:"Heading 2";
+	mso-ansi-font-size:14.0pt;
+	mso-bidi-font-size:14.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	mso-ansi-language:EN-US;
+	mso-fareast-language:EN-US;
+	mso-bidi-language:AR-SA;
+	font-weight:bold;
+	font-style:italic;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	mso-ansi-font-size:13.0pt;
+	mso-bidi-font-size:13.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	mso-ansi-language:EN-US;
+	mso-fareast-language:EN-US;
+	mso-bidi-language:AR-SA;
+	font-weight:bold;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:-129;
+	mso-list-type:simple;
+	mso-list-template-ids:-1753334914;}
+@list l0:level1
+	{mso-level-style-link:"List Number 2";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:-120;
+	mso-list-type:simple;
+	mso-list-template-ids:145022186;}
+@list l1:level1
+	{mso-level-style-link:"List Number";
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:59443714;
+	mso-list-template-ids:768363184;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l3
+	{mso-list-id:132451742;
+	mso-list-type:hybrid;
+	mso-list-template-ids:384615566 67698691 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l3:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4
+	{mso-list-id:258415304;
+	mso-list-template-ids:67698719;
+	mso-list-style-name:"1 \/ 1\.1 \/ 1\.1\.1";}
+@list l4:level1
+	{mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l4:level2
+	{mso-level-text:"%1\.%2\.";
+	mso-level-tab-stop:.55in;
+	mso-level-number-position:left;
+	margin-left:.55in;
+	text-indent:-.3in;}
+@list l4:level3
+	{mso-level-text:"%1\.%2\.%3\.";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:.85in;
+	text-indent:-.35in;}
+@list l4:level4
+	{mso-level-text:"%1\.%2\.%3\.%4\.";
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.2in;
+	text-indent:-.45in;}
+@list l4:level5
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.";
+	mso-level-tab-stop:1.75in;
+	mso-level-number-position:left;
+	margin-left:1.55in;
+	text-indent:-.55in;}
+@list l4:level6
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.";
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	margin-left:1.9in;
+	text-indent:-.65in;}
+@list l4:level7
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.";
+	mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.75in;}
+@list l4:level8
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8\.";
+	mso-level-tab-stop:2.75in;
+	mso-level-number-position:left;
+	margin-left:2.6in;
+	text-indent:-.85in;}
+@list l4:level9
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8\.%9\.";
+	mso-level-tab-stop:3.25in;
+	mso-level-number-position:left;
+	margin-left:3.0in;
+	text-indent:-1.0in;}
+@list l5
+	{mso-list-id:453987815;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-307307582 67698691 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l5:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l5:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6
+	{mso-list-id:616109929;
+	mso-list-template-ids:2087206438;}
+@list l6:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l7
+	{mso-list-id:1016152579;
+	mso-list-template-ids:67698719;}
+@list l7:level1
+	{mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l7:level2
+	{mso-level-text:"%1\.%2\.";
+	mso-level-tab-stop:.55in;
+	mso-level-number-position:left;
+	margin-left:.55in;
+	text-indent:-.3in;}
+@list l7:level3
+	{mso-level-text:"%1\.%2\.%3\.";
+	mso-level-tab-stop:.85in;
+	mso-level-number-position:left;
+	margin-left:.85in;
+	text-indent:-.35in;}
+@list l7:level4
+	{mso-level-text:"%1\.%2\.%3\.%4\.";
+	mso-level-tab-stop:1.2in;
+	mso-level-number-position:left;
+	margin-left:1.2in;
+	text-indent:-.45in;}
+@list l7:level5
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.";
+	mso-level-tab-stop:1.55in;
+	mso-level-number-position:left;
+	margin-left:1.55in;
+	text-indent:-.55in;}
+@list l7:level6
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.";
+	mso-level-tab-stop:1.9in;
+	mso-level-number-position:left;
+	margin-left:1.9in;
+	text-indent:-.65in;}
+@list l7:level7
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.";
+	mso-level-tab-stop:2.25in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.75in;}
+@list l7:level8
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8\.";
+	mso-level-tab-stop:2.6in;
+	mso-level-number-position:left;
+	margin-left:2.6in;
+	text-indent:-.85in;}
+@list l7:level9
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8\.%9\.";
+	mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	margin-left:3.0in;
+	text-indent:-1.0in;}
+@list l8
+	{mso-list-id:1080563000;
+	mso-list-template-ids:1860619818;}
+@list l8:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l9
+	{mso-list-id:1223564197;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1616960876 67698691 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l9:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l9:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l9:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l10
+	{mso-list-id:1287854127;
+	mso-list-template-ids:-738922696;}
+@list l10:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l11
+	{mso-list-id:1418941369;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1598076356 67698691 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l11:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l11:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l12
+	{mso-list-id:1479154153;
+	mso-list-template-ids:1443028720;}
+@list l12:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l13
+	{mso-list-id:1543789626;
+	mso-list-template-ids:-1109786082;}
+@list l13:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l14
+	{mso-list-id:1561555388;
+	mso-list-template-ids:67698725;}
+@list l14:level1
+	{mso-level-style-link:"Heading 1";
+	mso-level-text:%1;
+	mso-level-tab-stop:.3in;
+	mso-level-number-position:left;
+	margin-left:.3in;
+	text-indent:-.3in;}
+@list l14:level2
+	{mso-level-style-link:"Heading 2";
+	mso-level-text:"%1\.%2";
+	mso-level-tab-stop:.4in;
+	mso-level-number-position:left;
+	margin-left:.4in;
+	text-indent:-.4in;}
+@list l14:level3
+	{mso-level-style-link:"Heading 3";
+	mso-level-text:"%1\.%2\.%3";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	margin-left:.5in;
+	text-indent:-.5in;}
+@list l14:level4
+	{mso-level-style-link:"Heading 4";
+	mso-level-text:"%1\.%2\.%3\.%4";
+	mso-level-tab-stop:.6in;
+	mso-level-number-position:left;
+	margin-left:.6in;
+	text-indent:-.6in;}
+@list l14:level5
+	{mso-level-style-link:"Heading 5";
+	mso-level-text:"%1\.%2\.%3\.%4\.%5";
+	mso-level-tab-stop:.7in;
+	mso-level-number-position:left;
+	margin-left:.7in;
+	text-indent:-.7in;}
+@list l14:level6
+	{mso-level-style-link:"Heading 6";
+	mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6";
+	mso-level-tab-stop:.8in;
+	mso-level-number-position:left;
+	margin-left:.8in;
+	text-indent:-.8in;}
+@list l14:level7
+	{mso-level-style-link:"Heading 7";
+	mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7";
+	mso-level-tab-stop:.9in;
+	mso-level-number-position:left;
+	margin-left:.9in;
+	text-indent:-.9in;}
+@list l14:level8
+	{mso-level-style-link:"Heading 8";
+	mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-1.0in;}
+@list l14:level9
+	{mso-level-style-link:"Heading 9";
+	mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8\.%9";
+	mso-level-tab-stop:1.1in;
+	mso-level-number-position:left;
+	margin-left:1.1in;
+	text-indent:-1.1in;}
+@list l15
+	{mso-list-id:1787117485;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1060921044 67698691 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l15:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l15:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l15:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+table.MsoTableGrid
+	{mso-style-name:"Table Grid";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	border:solid windowtext 1.0pt;
+	mso-border-alt:solid windowtext .5pt;
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-border-insideh:.5pt solid windowtext;
+	mso-border-insidev:.5pt solid windowtext;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="51202">
+  <o:colormenu v:ext="edit" fillcolor="white"/>
+ </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><font size=5 face="Times New Roman"><span style='font-size:20.0pt;
+font-weight:bold;mso-bidi-font-weight:normal'>C AVL Tree &#8220;Generic
+Package&#8221;<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><font size=3
+face="Times New Roman"><span style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal align=center style='text-align:center'><font size=3
+face="Times New Roman"><span style='font-size:12.0pt'>Version 1.5</span></font></p>
+
+<p class=MsoNormal align=center style='text-align:center'><font size=3
+face="Times New Roman"><span style='font-size:12.0pt'>Author:<span
+style='mso-spacerun:yes'>  </span><a href="http://www.geocities.com/wkaras/">Walt
+Karas</a></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h1 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><font size=5 face=Arial><span
+style='font-size:16.0pt;mso-bidi-font-weight:normal'>1<span
+style='mso-spacerun:yes'>  </span>Introduction</span></font></b></span></h1>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This document explains how to use a C AVL Tree &#8220;generic
+package&#8221;.<span style='mso-spacerun:yes'>  </span>The C macro processor is
+used to make the package code independent of the type of data to be stored in
+the tree, and the memory management scheme for tree nodes.<span
+style='mso-spacerun:yes'>  </span><span class=SpellE>Adelson-Velskii</span> and
+Landis Balanced Binary Search Trees (or AVL Trees) are described in many good
+textbooks on fundamental data structures.<span style='mso-spacerun:yes'> 
+</span>The best web page I&#8217;ve been able to find on the topic is &#8220;<a
+href="http://www.vbwm.com/art_2001/avltree08">A Visual Basic AVL Tree Container
+Class</a>&#8221;.<span style='mso-spacerun:yes'>  </span>I have also written a <a
+href="http://www.geocities.com/wkaras/gen_cpp/avl_tree.html">C++ version</a> of
+this data structure.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This document, as well as the source code it describes, is in the
+public domain.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>To avoid possible confusion about the terms that I use in this document
+(and in the source comments), here is a summary description of AVL Trees.<span
+style='mso-spacerun:yes'>  </span>An AVL Tree is a set of <i style='mso-bidi-font-style:
+normal'><span style='font-style:italic;mso-bidi-font-style:normal'>nodes</span></i>
+(or <i style='mso-bidi-font-style:normal'><span style='font-style:italic;
+mso-bidi-font-style:normal'>elements</span></i>).<span
+style='mso-spacerun:yes'>  </span>Each node is associated with a unique <i
+style='mso-bidi-font-style:normal'><span style='font-style:italic;mso-bidi-font-style:
+normal'>key</span></i> value.<span style='mso-spacerun:yes'>  </span>The key
+values can be ordered from least to greatest.<span style='mso-spacerun:yes'> 
+</span>Each node in the tree may (or may not) have a <i style='mso-bidi-font-style:
+normal'><span style='font-style:italic;mso-bidi-font-style:normal'>less child</span></i>
+<span class=GramE>node,</span> and it may (or may not) have a <i
+style='mso-bidi-font-style:normal'><span style='font-style:italic;mso-bidi-font-style:
+normal'>greater child</span></i> node.<span style='mso-spacerun:yes'> 
+</span>If node A is a child of node B, then B is the <i style='mso-bidi-font-style:
+normal'><span style='font-style:italic;mso-bidi-font-style:normal'>parent</span></i>
+of A.<span style='mso-spacerun:yes'>  </span>If A is the less child of B,
+A&#8217;s key must be less than B&#8217;s key.<span style='mso-spacerun:yes'> 
+</span>Similarly, if A is the greater child of B, A&#8217;s key must be greater
+than B&#8217;s key.<span style='mso-spacerun:yes'>  </span>(Because of the way
+that binary search trees are typically diagrammed, the <span class=GramE>less
+child</span> is commonly called the left child, and the greater child is
+commonly called the right child.)<span style='mso-spacerun:yes'>  </span>All
+nodes in a tree have exactly one parent, except for the <i style='mso-bidi-font-style:
+normal'><span style='font-style:italic;mso-bidi-font-style:normal'>root</span></i>
+node, which has no parent.<span style='mso-spacerun:yes'>  </span>Node A is a <i
+style='mso-bidi-font-style:normal'><span style='font-style:italic;mso-bidi-font-style:
+normal'>descendant</span></i> of node C if C is A&#8217;s parent, or if
+A&#8217;s parent is a descendant of C.<span style='mso-spacerun:yes'> 
+</span>If a node is not the root of the entire tree, it is the root of a <i
+style='mso-bidi-font-style:normal'><span style='font-style:italic;mso-bidi-font-style:
+normal'>subtree</span></i> consisting of the node and all its descendants.<span
+style='mso-spacerun:yes'>  </span>The <i style='mso-bidi-font-style:normal'><span
+style='font-style:italic;mso-bidi-font-style:normal'>less subtree</span></i> of
+a node is the subtree whose root is the less child of the node.<span
+style='mso-spacerun:yes'>  </span>The <i style='mso-bidi-font-style:normal'><span
+style='font-style:italic;mso-bidi-font-style:normal'>greater subtree</span></i>
+of a node is the subtree whose root is the greater child of the node.<span
+style='mso-spacerun:yes'>  </span>The <i style='mso-bidi-font-style:normal'><span
+style='font-style:italic;mso-bidi-font-style:normal'>depth</span></i> of a node
+is one more than the depth of its parent.<span style='mso-spacerun:yes'> 
+</span>The depth of the root node is 1.<span style='mso-spacerun:yes'> 
+</span>The depth of a tree is the maximum node depth.<span
+style='mso-spacerun:yes'>  </span>The <i style='mso-bidi-font-style:normal'><span
+style='font-style:italic;mso-bidi-font-style:normal'>balance factor</span></i>
+of a node is the depth of its greater subtree minus the depth of its <span
+class=GramE>less subtree</span>, with non-existent subtrees being considered to
+have a depth of 0.<span style='mso-spacerun:yes'>  </span>In an AVL tree, the
+balance factor of any node can only be -1, 0 or 1.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>There are several <span class=GramE>open-source</span> C and C++
+implementations of AVL Trees available (see &#8220;Hot Links&#8221;, then
+&#8220;Data Structures&#8221; at <a href="http://www.hal9k.com/cug/">C/C++
+User&#8217;s Group Page</a> ).<span style='mso-spacerun:yes'>  </span>But as
+far as I know, this is the only one that manipulates the nodes of the tree
+using abstract &#8220;handles&#8221; instead of concrete pointers.<span
+style='mso-spacerun:yes'>  </span>If all the nodes are in a single array, you
+can use node indexes as handles instead of node pointers.<span
+style='mso-spacerun:yes'>  </span>This approach makes it possible to compress
+the size of the nodes if memory is tight.<span style='mso-spacerun:yes'> 
+</span>Using indexes as handles (instead of pointers) can make tree persistence
+as simple as writing the node array out with a single disk write, and reading
+it back in with a single disk read.<span style='mso-spacerun:yes'>  </span>The
+package also allows for a tree to be in secondary storage, with nodes being
+&#8220;paged&#8221; in and out of memory.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>The package code makes no use of recursion.<span
+style='mso-spacerun:yes'>  </span>The implementation is stack-friendly in
+general, except perhaps for the </span></font><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structure.<span style='mso-spacerun:yes'>  </span>Variables of type <span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+contain an array of handles whose dimension is the maximum tree depth minus
+one.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Since key comparisons can potentially be complex, the code avoids
+repeated comparisons of the same pair of node key values.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h1 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><font size=5 face=Arial><span
+style='font-size:16.0pt;mso-bidi-font-weight:normal'>2<span
+style='mso-spacerun:yes'>  </span>Source</span></font></b></span><span
+style='mso-bidi-font-weight:normal'> Files</span></h1>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>The interface to an instantiation of the package is generated by the
+header file <a href="cavl_if_h.txt"><span class=SpellE>cavl_if.h</span></a> .</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>The implementation of an instantiation of the package is generated by
+the header file <a href="cavl_impl_h.txt"><span class=SpellE>cavl_impl.h</span></a>
+.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>The package header files reserve the right to change the definition of
+any macro name beginning with the prefix </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>L__</span></font> (upper-case L followed by
+two underscores).</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>I have written two examples to show how to instantiate and use this
+package.<span style='mso-spacerun:yes'>  </span>Example 1 shows how to create
+an instantiation used in multiple compilation units.<span
+style='mso-spacerun:yes'>  </span>The interface header to the instantiation is
+in <a href="cavl_ex1_h.txt">cavl_ex1.h</a> .<span style='mso-spacerun:yes'> 
+</span>The implementation of the instantiation is in <a href="cavl_ex1i_c.txt">cavl_ex1i.c</a>
+.<span style='mso-spacerun:yes'>  </span>Usage of the instantiation is shown in
+<a href="cavl_ex1u_c.txt">cavl_ex1u.c</a> .<span style='mso-spacerun:yes'> 
+</span>Example 2 shows how to create an instantiation used in a single
+compilation unit.<span style='mso-spacerun:yes'>  </span><a href="cavl_ex2_c.txt"><span
+class=GramE>cavl_ex2.c</span></a> contains the code for example 2.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>A test suite for the package is in the (C++) file <a
+href="test_cavl_cpp.txt"><span class=SpellE>test_cavl.cpp</span></a> .</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>All of this code compiles with a contemporary version of GNU GCC, and
+with Visual C++ .NET.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>All input macros are required, unless explicitly specified as being
+optional.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h1 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><font size=5 face=Arial><span
+style='font-size:16.0pt;mso-bidi-font-weight:normal'>3<span
+style='mso-spacerun:yes'>  </span>Inputs</span></font></b></span><span
+style='mso-bidi-font-weight:normal'> to Both <span class=SpellE>cavl_if.h</span>
+and <span class=SpellE>cavl_impl.h</span></span></h1>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>These macros must be defined prior to the inclusion of <span
+class=SpellE>cavl_if.h</span> or <span class=SpellE>cavl_impl.h</span> in a
+compilation unit.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.1<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_UNIQUE</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>A macro with one parameter.</span></font></span><span
+style='mso-spacerun:yes'>  </span>The parameter must be a valid C
+identifier.<span style='mso-spacerun:yes'>  </span>The macro should use token
+concatenation to alter the identifier passed as a parameter, and make it unique
+for the package instantiation.<span style='mso-spacerun:yes'>  </span>The
+alteration defined by this macro is applied to the identifiers for all output
+definitions/declarations generated by <span class=SpellE>cavl_if.h</span>,
+except those that begin with the prefix <font face="Courier New"><span
+style='font-family:"Courier New"'>AVL_</span></font> or <span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>avl</span></font></span><span
+class=GramE><font face="Courier New"><span style='font-family:"Courier New"'>_</span></font>
+.</span><span style='mso-spacerun:yes'>  </span>If, for example, the macro is defined
+as:</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>#define AVL_<span class=GramE>UNIQUE(</span>ID) xyz_
+## ID<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>then</span></font></span> the identifier for the <font
+face="Courier New"><span style='font-family:"Courier New"'>insert</span></font>
+function will be altered to <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>xyz_insert</span></font></span> .</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro is optional.<span style='mso-spacerun:yes'>  </span>If it is
+undefined, there is no alteration of any identifiers.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.2<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_PRIVATE</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>If this optional macro is defined, all of the functions declared by <span
+class=SpellE>cavl_if.h</span> will be static functions.<span
+style='mso-spacerun:yes'>  </span>(If it&#8217;s defined, it doesn&#8217;t
+matter what it&#8217;s defined to be.)</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.3<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_HANDLE</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>A parameterless macro that expands to the type
+specifier for the handle type.</span></font></span><span
+style='mso-spacerun:yes'>  </span>By &#8220;type specifier&#8221; I mean that a
+statement of the form:</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE identifier;<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>must</span></font></span> expand to a valid definition
+of a handle named &#8220;identifier&#8221;.<span style='mso-spacerun:yes'> 
+</span>Each node has to be associated with a node handle, which is a unique
+value of the handle type.<span style='mso-spacerun:yes'>  </span>Pointers and
+integral types can be handles.<span style='mso-spacerun:yes'>  </span>Handles
+must be passable as value parameters, assignable, and comparable for equality.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.4<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_KEY</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>A parameterless macro that expands to the type
+specifier for the key type.</span></font></span><span
+style='mso-spacerun:yes'>  </span>Each node has to be associated with a key,
+which is a unique value of the key type.<span style='mso-spacerun:yes'> 
+</span>The difference between a key and a handle is that a node can be
+conveniently &#8220;looked up&#8221; using its handle, but it can&#8217;t be
+conveniently looked up using its key.<span style='mso-spacerun:yes'>  </span>In
+fact, the whole point of this package is to make it convenient to look up a
+node given its key.<span style='mso-spacerun:yes'>  </span>Key values must be
+passable by value as parameters.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.5<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_MAX_DEPTH</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>A parameterless macro that expands to an integral
+expression, which gives the maximum tree depth.</span></font></span><span
+style='mso-spacerun:yes'>  </span>You almost certainly want to choose the maximum
+depth based on the maximum number of nodes that could possibly be in a tree at
+any given time.<span style='mso-spacerun:yes'>  </span>To do this, let the
+maximum depth be M such that:</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+ style='margin-left:-.4pt;border-collapse:collapse;mso-yfti-tbllook:480;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width=83 style='width:62.6pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><font size=3
+  face="Times New Roman"><span style='font-size:12.0pt'>MN(M)</span></font></p>
+  </td>
+  <td width=48 style='width:.5in;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><font size=5
+  face="Times New Roman"><span style='font-size:20.0pt'>&lt;=</span></font></p>
+  </td>
+  <td width=180 style='width:135.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><font size=3
+  face="Times New Roman"><span style='font-size:12.0pt'>maximum number of nodes</span></font></p>
+  </td>
+  <td width=29 style='width:22.05pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><font size=5
+  face="Times New Roman"><span style='font-size:20.0pt'>&lt;</span></font></p>
+  </td>
+  <td width=103 style='width:77.35pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><font size=3
+  face="Times New Roman"><span style='font-size:12.0pt'>MN(M + 1)</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>where</span></font></span> MN(d) means the minimum number
+of nodes in an AVL Tree of depth d.<span style='mso-spacerun:yes'>  </span>Here
+is a table of <span class=GramE>MN(</span>d) values for d from 2 to 45.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:480;mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-bottom:solid windowtext 3.0pt;mso-border-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>d</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:solid windowtext 1.0pt;
+  border-left:none;border-bottom:solid windowtext 3.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>MN(d)</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 3.0pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>2</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 3.0pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 3.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>2</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>3</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>4</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>4</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>7</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>5</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>12</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>6</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>20</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>7</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>33</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>8</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>54</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>9</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>88</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>10</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>143</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>11</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>232</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>12</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>376</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>13</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>609</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>14</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>986</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>15</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>1,596</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>16</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>2,583</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>17</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>4,180</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>18</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>6,764</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>19</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>10,945</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>20</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>17,710</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>21</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>28,656</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:21'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>22</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>46,367</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:22'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>23</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>75,024</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:23'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>24</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>121,392</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:24'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>25</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>196,417</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:25'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>26</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>317,810</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:26'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>27</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>514,228</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:27'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>28</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>832,039</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:28'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>29</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>1,346,268</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:29'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>30</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>2,178,308</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:30'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>31</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>3,524,577</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:31'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>32</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>5,702,886</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:32'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>33</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>9,227,464</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:33'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>34</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>14,930,351</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:34'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>35</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>24,157,816</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:35'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>36</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>39,088,168</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:36'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>37</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>63,245,985</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:37'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>38</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>102,334,154</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:38'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>39</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>165,580,140</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:39'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>40</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>267,914,295</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:40'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>41</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>433,494,436</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:41'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>42</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>701,408,732</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:42'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>43</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>1,134,903,169</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:43'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>44</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>1,836,311,902</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:44;mso-yfti-lastrow:yes'>
+  <td width=59 valign=top style='width:44.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>45</span></font></p>
+  </td>
+  <td width=108 valign=top style='width:81.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>2,971,215,072</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>(In general, <span class=GramE>MN(</span>d) = MN(d &#8211; 1) + MN(d
+&#8211; 2) + 1 .)</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>If, in a particular instantiation, the maximum number of nodes in a
+tree is 1,000,000, the maximum depth should be 28. You pick 28 because <span
+class=GramE>MN(</span>28) is 832,039, which is less than or equal to 1,000,000,
+and MN(29) is 1,346,268, which is strictly greater than 1,000,000.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>If you insert a node that would cause the tree to grow to a depth
+greater than the maximum you gave, the results are undefined.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Each increase of 1 in the value <span class=GramE>of<span
+style='mso-spacerun:yes'>  </span><font face="Courier New"><span
+style='font-family:"Courier New"'>MAX</span></font></span></span></font><font
+face="Courier New"><span style='font-family:"Courier New"'>_DEPTH</span></font>
+increases the size of a variable of type <span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+(defined below) by <font face="Courier New"><span style='font-family:"Courier New"'>sizeof(handle)</span></font>.<span
+style='mso-spacerun:yes'>  </span>The only other use of <font face="Courier New"><span
+style='font-family:"Courier New"'>MAX_DEPTH</span></font> is as the size of bit
+arrays used at various places in the code.<span style='mso-spacerun:yes'> 
+</span>The number of bytes in a bit array is the size rounded up to a multiple
+of the number of bits in a <font face="Courier New"><span style='font-family:
+"Courier New"'>long</span></font>, and divided by the number of bits in a
+byte.<span style='mso-spacerun:yes'>  </span>All this is a roundabout way of
+saying that, if you don&#8217;t use <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>iter</span></font></span> structures, you can
+guiltlessly add a big safety margin to the value of <font face="Courier New"><span
+style='font-family:"Courier New"'>MAX_DEPTH</span></font>.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.6<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_INSIDE_STRUCT<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This parameterless macro is optional.<span style='mso-spacerun:yes'> 
+</span>If defined, it should expand to one or more field definitions to be
+included in the </span></font><span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>avl</span></font></span> structure generated
+by <span class=SpellE>cavl_<span class=GramE>if.h</span></span><span
+class=GramE> .</span></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>The reason for this macro is to allow you place fields in the structure
+that are needed by your </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>SET</span></font> / <font face="Courier New"><span
+style='font-family:"Courier New"'>GET</span></font> macros.<span
+style='mso-spacerun:yes'>  </span>If you are using array indexes as handles,
+this macro could be used to place the array of nodes or a pointer to the array
+of nodes into the <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>avl</span></font></span> structure.<span
+style='mso-spacerun:yes'>  </span>Defining this macro causes an extra parameter
+to be passed to an internal function, so using it when you don&#8217;t need to
+results in slightly-less-than-optimal code.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.7<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_BUILD_ITER_TYPE</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This optional parameterless macro expands to the type of the iterators
+passed to the </span></font><font face="Courier New"><span style='font-family:
+"Courier New"'>build</span></font> function.<span style='mso-spacerun:yes'> 
+</span>You only have to define this macro if you use the <font
+face="Courier New"><span style='font-family:"Courier New"'>build</span></font>
+function.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>3.8<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_SIZE</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>An optional parameterless macro that expands to the type specifier for
+the size type, which must be </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>char</span></font>, <font face="Courier New"><span
+style='font-family:"Courier New"'>short</span></font>, <span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>int</span></font></span>
+or <font face="Courier New"><span style='font-family:"Courier New"'>long</span></font>,
+signed or unsigned.<span style='mso-spacerun:yes'>  </span>A variable of this
+type must be large enough the hold the maximum possible number of nodes in the
+tree.<span style='mso-spacerun:yes'>  </span>This macro is optional.<span
+style='mso-spacerun:yes'>  </span>If it is not defined, <font face="Courier New"><span
+style='font-family:"Courier New"'>unsigned long</span></font> is used by
+default.<span style='mso-spacerun:yes'>  </span>This type is only used by the <font
+face="Courier New"><span style='font-family:"Courier New"'>build</span></font>
+function, so don&#8217;t bother to define it if you don&#8217;t use the <font
+face="Courier New"><span style='font-family:"Courier New"'>build</span></font>
+function.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h1 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><font size=5 face=Arial><span
+style='font-size:16.0pt;mso-bidi-font-weight:normal'>4<span
+style='mso-spacerun:yes'>  </span>Inputs</span></font></b></span><span
+style='mso-bidi-font-weight:normal'> to <span class=SpellE>cavl_impl.h</span>
+Only</span></h1>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>These macros must be defined prior to the inclusion of <span
+class=SpellE>cavl_impl.h</span> in a compilation unit.<span
+style='mso-spacerun:yes'>  </span>The definitions of these macros may use the
+symbol </span></font><span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>L__tree</span></font></span>.<span
+style='mso-spacerun:yes'>  </span><span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>L__tree</span></font></span> is a pointer to
+the <span class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>avl</span></font></span>
+structure for the tree, or a (parameterless) macro that expands to an
+expression yielding a pointer to the <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>avl</span></font></span> structure for the
+tree.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.1<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_GET_LESS</span></font>,
+<font face="Courier New"><span style='font-family:"Courier New"'>AVL_GET_GREATER</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>These macros take two parameters.<span style='mso-spacerun:yes'> 
+</span>They must expand to expressions that give the handle of the less/greater
+child of the node whose handle is given as the first parameter.<span
+style='mso-spacerun:yes'>  </span>If the second parameter is an expression
+whose result is non-zero, and the child node is in secondary storage, it has to
+be read into memory.<span style='mso-spacerun:yes'>  </span>Otherwise, the
+child node does not have to be read into memory.<span
+style='mso-spacerun:yes'>  </span>Ignore the second parameter in your
+implementation of these macros if your instantiation makes no use of secondary
+storage.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.2<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_SET_LESS</span></font>,
+<font face="Courier New"><span style='font-family:"Courier New"'>AVL_SET_GREATER</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>These macros take two parameters, both of which are node handles.<span
+style='mso-spacerun:yes'>  </span>The second node is set as the less/greater
+child of the first node.<span style='mso-spacerun:yes'>  </span>They must
+expand to complete statements.<span style='mso-spacerun:yes'>  </span>(That is
+to say, an invocation of the macro shouldn&#8217;t require a semicolon after
+it.)</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.3<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_GET_BALANCE_FACTOR<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro takes one parameter, a node handle.<span
+style='mso-spacerun:yes'>  </span>It must expand to an expression returning the
+balance factor of the node.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.4<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_SET_BALANCE_FACTOR<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro takes two parameters.<span style='mso-spacerun:yes'> 
+</span>The first parameter is a node handle, and the second parameter is a
+balance factor (-1, 0 or 1).<span style='mso-spacerun:yes'>  </span>The balance
+factor given is set as the balance factor of the node.<span
+style='mso-spacerun:yes'>  </span>This macro must expand to a complete
+statement.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.5<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_COMPARE_KEY_NODE<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro takes two parameters.<span style='mso-spacerun:yes'> 
+</span>The first parameter is a key value, and the second parameter is a node
+handle.<span style='mso-spacerun:yes'>  </span>The macro compares the key with
+the key of a node.<span style='mso-spacerun:yes'>  </span>It must expand to an
+expression that returns a negative (integral) value if the key is less than the
+node&#8217;s key.<span style='mso-spacerun:yes'>  </span>The macro must return
+zero if the key is the same as the node&#8217;s key.<span
+style='mso-spacerun:yes'>  </span>A positive value must be returned if the key
+is greater than the node&#8217;s key.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.6<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_COMPARE_NODE_NODE<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro takes two parameters.<span style='mso-spacerun:yes'> 
+</span>Both parameters must be node handles.<span style='mso-spacerun:yes'> 
+</span>The macro compares the key of the first node to the key of the second
+node.<span style='mso-spacerun:yes'>  </span>It must expand to an expression
+that returns a negative (integral) value if the first node&#8217;s key is less
+than the second node&#8217;s key, zero if the two nodes have the same key <span
+class=GramE>value,</span> or a positive value if the first node&#8217;s key is
+greater than the second node&#8217;s key.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.7<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_NULL<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This parameterless macro must expand to an expression yielding the <i
+style='mso-bidi-font-style:normal'><span style='font-style:italic;mso-bidi-font-style:
+normal'>null</span></i> handle value.<span style='mso-spacerun:yes'> 
+</span>The null value is a particular invalid handle value.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.8<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_READ_ERRORS_HAPPEN<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>If this optional macro is defined, it indicates that nodes are stored
+in secondary storage, and that errors can occur when reading nodes from secondary
+into primary storage.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.9<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_READ_ERROR<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This parameterless macro expands to an expression returning an integral
+value.<span style='mso-spacerun:yes'>  </span>If the integral value is
+non-zero, this indicates an error has occurred while reading a node from
+secondary into primary storage.<span style='mso-spacerun:yes'>  </span>It is
+not necessary to define this macro if </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>AVL_READ_ERRORS_HAPPEN</span></font> is
+undefined.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.10<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_BUILD_ITER_VAL<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro takes one parameter, the name (lvalue) of a variable of type
+</span></font><font face="Courier New"><span style='font-family:"Courier New"'>AVL_BUILD_ITER_TYPE</span></font>.<span
+style='mso-spacerun:yes'>  </span>The macro must expand to an expression that
+returns the handle of the node that the iterator (passed as the parameter)
+refers to.<span style='mso-spacerun:yes'>  </span>You should not define this
+macro if <font face="Courier New"><span style='font-family:"Courier New"'>AVL_BUILD_ITER_TYPE</span></font>
+is not defined.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.11<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_BUILD_ITER_INCR<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This macro takes one parameter, the name (lvalue) of a variable of type
+</span></font><font face="Courier New"><span style='font-family:"Courier New"'>AVL_BUILD_ITER_TYPE</span></font>.<span
+style='mso-spacerun:yes'>  </span>The macro must expand to a complete statement
+that increments the iterator (passed as the parameter) so that it refers to the
+next node in the sequence.<span style='mso-spacerun:yes'>  </span>You should
+not define this macro if <font face="Courier New"><span style='font-family:
+"Courier New"'>AVL_BUILD_ITER_TYPE</span></font> is not defined.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>4.12<span style='mso-spacerun:yes'>  </span></span></font></i></b><font
+face="Courier New"><span style='font-family:"Courier New"'>AVL</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>_IMPL_MASK<o:p></o:p></span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This optional parameterless macro should expand to a mask that controls
+which function bodies are generated by the header file <span class=SpellE>cavl_<span
+class=GramE>impl.h</span></span><span class=GramE> .</span><span
+style='mso-spacerun:yes'>  </span>It should be created using the function bit
+masks, which have the </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>AVL_IMPL_</span></font> prefix, defined by <span
+class=SpellE>cavl_if.h</span>.<span style='mso-spacerun:yes'>  </span>If this
+macro is undefined, it defaults to <font face="Courier New"><span
+style='font-family:"Courier New"'>AVL_IMPL_ALL</span></font> (all function
+bodies generated).</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h1 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><font size=5 face=Arial><span
+style='font-size:16.0pt;mso-bidi-font-weight:normal'>5<span
+style='mso-spacerun:yes'>  </span>Outputs</span></font></b></span><span
+style='mso-bidi-font-weight:normal'> from <span class=SpellE>cavl_if.h</span></span></h1>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>These data types and function prototypes are generated by the header
+file <span class=SpellE>cavl_<span class=GramE>if.h</span></span><span
+class=GramE> .</span><span style='mso-spacerun:yes'>  </span><span
+class=SpellE><span class=GramE>cavl_impl.h</span></span> generates the bodies
+of the functions whose prototypes are generated by <span class=SpellE>cavl_if.h</span>
+.<span style='mso-spacerun:yes'>  </span><span class=SpellE><span class=GramE>cavl_impl.h</span></span>
+should be included (at least) once for each distinct package instantiation, in
+(at least) one compilation unit to be included in the executable.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>If the macro </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>AVL_UNIQUE</span></font> is defined, the name
+of each function and data type (whose name does not begin with <span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>avl</span></font></span><span
+class=GramE><font face="Courier New"><span style='font-family:"Courier New"'>_</span></font>
+)</span> will be altered by <font face="Courier New"><span style='font-family:
+"Courier New"'>AVL_UNIQUE</span></font> .</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.1<span style='mso-spacerun:yes'> 
+</span>Structure</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>avl</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This structure is defined as:</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>typedef</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> struct<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>    </span>AVL_INSIDE_STRUCT<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>    </span>AVL_HANDLE
+root;<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><font size=3
+face="Courier New"><span style='font-size:12.0pt;font-family:"Courier New"'>avl</span></font></span></span><font
+face="Courier New"><span style='font-family:"Courier New"'>;</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>(<span class=GramE>ignoring</span> any alteration of the identifier </span></font><span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>avl</span></font></span>
+by <font face="Courier New"><span style='font-family:"Courier New"'>AVL_UNIQUE</span></font>).<span
+style='mso-spacerun:yes'>  </span>An individual variable of this type
+represents an individual AVL tree.<span style='mso-spacerun:yes'>  </span><span
+class=GramE><font face="Courier New"><span style='font-family:"Courier New"'>root</span></font></span>
+is the handle of the root node of the tree.<span style='mso-spacerun:yes'> 
+</span>If the tree is empty, <font face="Courier New"><span style='font-family:
+"Courier New"'>root</span></font> contains the null value.<span
+style='mso-spacerun:yes'>  </span>(The identifier <font face="Courier New"><span
+style='font-family:"Courier New"'>root</span></font> is not altered by <font
+face="Courier New"><span style='font-family:"Courier New"'>AVL_UNIQUE</span></font>.)</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.2<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><font face="Courier New"><span
+style='font-family:"Courier New"'>init</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> init(<span
+class=SpellE>avl</span> *tree);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Puts a tree into an initial, empty state.</span></font></span><span
+style='mso-spacerun:yes'>  </span>It can be used to initialize a tree, or to
+remove all nodes from a previously initialize tree.<span
+style='mso-spacerun:yes'>  </span>This function simply assigns the null value
+to the <font face="Courier New"><span style='font-family:"Courier New"'>root</span></font>
+field in the <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>avl</span></font></span> structure.<span
+style='mso-spacerun:yes'>  </span>You can initialize the <font
+face="Courier New"><span style='font-family:"Courier New"'>root</span></font>
+field to null using a static initializer if you prefer.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.2<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><font face="Courier New"><span
+style='font-family:"Courier New"'>insert</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=GramE>insert(</span><span
+class=SpellE>avl</span> *tree, AVL_HANDLE h);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Insert the node with the given handle into the tree.<span
+style='mso-spacerun:yes'>  </span>The node must be associated with a key
+value.<span style='mso-spacerun:yes'>  </span>The initial values of the
+node&#8217;s less/greater child handles and its balance factor are
+don&#8217;t-cares.<span style='mso-spacerun:yes'>  </span>If successful, this
+function returns the handle of the inserted node.<span
+style='mso-spacerun:yes'>  </span>If the node to insert has the same key value
+as a node that&#8217;s already in the tree, the insertion is not performed, and
+the handle of the node already in the tree is returned.<span
+style='mso-spacerun:yes'>  </span>Returns the null value if there is an error
+reading secondary storage.<span style='mso-spacerun:yes'>  </span>Calling this
+function invalidates all currently-existing </span></font><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structures (that are iterating over this tree).</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.3<span style='mso-spacerun:yes'> 
+</span>Enum</span></font></i></b></span><span style='mso-bidi-font-weight:normal;
+mso-bidi-font-style:normal'> </span><span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>avl_search_type</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Defined as:</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>typedef</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> enum<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>    </span>AVL_EQUAL
+= 1,<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>    </span>AVL_LESS =
+2,<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>   
+</span>AVL_GREATER = 4,<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>   
+</span>AVL_LESS_EQUAL = AVL_EQUAL | AVL_LESS,<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>   
+</span>AVL_GREATER_EQUAL = AVL_EQUAL | AVL_GREATER<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><span class=SpellE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>avl_search_type</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'>;</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.4<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><font face="Courier New"><span
+style='font-family:"Courier New"'>search</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=GramE>search(</span><span
+class=SpellE>avl</span> *tree, AVL_KEY k, <span class=SpellE>avl_search_type</span>
+<span class=SpellE>st</span>);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Searches for a particular node in the tree, returning its
+handle if the node is found, and the null value if the node is not found.</span></font></span><span
+style='mso-spacerun:yes'>  </span>The node to search for depends on the value
+of the <span class=SpellE><font face="Courier New"><span style='font-family:
+"Courier New"'>st</span></font></span> parameter.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:480;mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-bottom:solid windowtext 3.0pt;mso-border-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Value of </span></font><span class=SpellE><font
+  face="Courier New"><span style='font-family:"Courier New"'>st</span></font></span></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:solid windowtext 1.0pt;
+  border-left:none;border-bottom:solid windowtext 3.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node to search for</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 3.0pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>EQUAL<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 3.0pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 3.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is equal to the key </span></font><font
+  face="Courier New"><span style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>LESS<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the maximum of the keys of all the
+  nodes with keys less than the key </span></font><font face="Courier New"><span
+  style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>GREATER<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the minimum of the keys of all the
+  nodes with keys greater than the key </span></font><font face="Courier New"><span
+  style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>LESS_EQUAL<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the maximum of the keys of all the
+  nodes with keys less than or equal to the key </span></font><font
+  face="Courier New"><span style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5;mso-yfti-lastrow:yes'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>GREATER_EQUAL<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the minimum of the keys of all the
+  nodes with keys greater than or equal to the key </span></font><font
+  face="Courier New"><span style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.5<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>search_least</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=SpellE>search_<span
+class=GramE>least</span></span><span class=GramE>(</span><span class=SpellE>avl</span>
+*tree);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Returns the handle of the node whose key is the
+minimum of the keys of all the nodes in the tree.</span></font></span><span
+style='mso-spacerun:yes'>  </span>Returns the null value if the tree is empty
+or an error <span class=GramE>occurs</span> reading from secondary storage.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.6<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>search_greatest</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=SpellE>search_<span
+class=GramE>greatest</span></span><span class=GramE>(</span><span class=SpellE>avl</span>
+*tree);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Returns the handle of the node whose key is the
+maximum of the keys of all the nodes in the tree.</span></font></span><span
+style='mso-spacerun:yes'>  </span>Returns the null value if the tree is empty
+or an error <span class=GramE>occurs</span> reading from secondary storage.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.7<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><font face="Courier New"><span
+style='font-family:"Courier New"'>remove</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=GramE>remove(</span><span
+class=SpellE>avl</span> *tree, AVL_KEY k);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Removes the node with the given k from the tree.</span></font></span><span
+style='mso-spacerun:yes'>  </span>Returns the handle of the node removed.<span
+style='mso-spacerun:yes'>  </span>Returns the null value if there is no node in
+the tree with the given key, or an error <span class=GramE>occurs</span>
+reading from secondary storage.<span style='mso-spacerun:yes'>  </span>Calling
+this function invalidates all currently-existing <span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structures (that are iterating over this tree).</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.8<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>is_empty</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><font size=3
+face="Courier New"><span style='font-size:12.0pt;font-family:"Courier New"'>int</span></font></span></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>is_empty</span>(<span
+class=SpellE>avl</span> *tree);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Returns non-zero if the tree is empty.</span></font></span></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.9<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><font face="Courier New"><span
+style='font-family:"Courier New"'>build</span></font></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><font size=3
+face="Courier New"><span style='font-size:12.0pt;font-family:"Courier New"'>int</span></font></span></span><font
+face="Courier New"><span style='font-family:"Courier New"'> build(<span
+class=SpellE>avl</span> *tree, AVL_BUILD_ITER_TYPE p, size <span class=SpellE>num_nodes</span>);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Builds a tree from a sequence of nodes that are sorted
+ascendingly by their key values.</span></font></span><span
+style='mso-spacerun:yes'>  </span>The number of nodes in the sequence is given
+by <span class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>num_nodes</span></font></span>.<span
+style='mso-spacerun:yes'>  </span><span class=GramE><font face="Courier New"><span
+style='font-family:"Courier New"'>p</span></font></span> is a forward iterator
+that initially refers to the first node in the sequence.<span
+style='mso-spacerun:yes'>  </span>Any nodes in the tree (prior to calling this
+function) are purged.<span style='mso-spacerun:yes'>  </span>The iterator will
+be incremented one last time when it refers to the last node in the
+sequence.<span style='mso-spacerun:yes'>  </span><span class=GramE><font
+face="Courier New"><span style='font-family:"Courier New"'>build</span></font></span>
+returns zero if a read error occurs while trying to build the tree, non-zero
+otherwise.<span style='mso-spacerun:yes'>  </span>The time complexity of this
+function is <span class=GramE>O(</span>n<span style='mso-spacerun:yes'> 
+</span>x<span style='mso-spacerun:yes'>  </span>log n), but it is more
+efficient than inserting the nodes in the sequence one at a time, and the
+resulting tree will generally have better balance.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.10<span style='mso-spacerun:yes'> 
+</span>Structure</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This structure (typedef) contains the state of a bi-directional
+iteration through an AVL tree.<span style='mso-spacerun:yes'>  </span>Once the
+iteration is started the </span></font><font face="Courier New"><span
+style='font-family:"Courier New"'>tree_</span></font> field in the structure
+contains a pointer to the <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>avl</span></font></span> structure of the
+tree being iterated over.<span style='mso-spacerun:yes'>  </span>If you use the
+value of any other field in the <span class=SpellE><font face="Courier New"><span
+style='font-family:"Courier New"'>iter</span></font></span> structure, or you
+change <font face="Courier New"><span style='font-family:"Courier New"'>tree_</span></font>
+or any other field in the structure, you&#8217;re on your own.<span
+style='mso-spacerun:yes'>  </span>There can be an unlimited number of
+iterations over a tree in progress simultaneously.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>A useful characteristic of the AVL tree data structure is the ability
+to do a final, destroying iteration over the nodes.<span
+style='mso-spacerun:yes'>  </span>Iteration must be in a single direction
+only.<span style='mso-spacerun:yes'>  </span>Once the iterator passes a node,
+the contents of the node can be discarded or overwritten.<span
+style='mso-spacerun:yes'>  </span>See the </span></font><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>clear_env</span></font></span>
+function Example 1 to see how a destructive iteration is done.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.11<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>start_iter</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>start_iter</span>(<span
+class=SpellE>avl</span> *tree, <span class=SpellE>iter</span> *it, AVL_KEY k, <span
+class=SpellE>avl_search_type</span> <span class=SpellE>st</span>);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Causes the iterator to refer to a particular node in
+the tree that is specified as the first parameter.</span></font></span><span
+style='mso-spacerun:yes'>  </span>If the particular node cannot be found in the
+tree, or if a read error occurs, the iterator is put into the null state.<span
+style='mso-spacerun:yes'>  </span>The particular node to refer to is determined
+by the <span class=SpellE><font face="Courier New"><span style='font-family:
+"Courier New"'>st</span></font></span> parameter.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;margin-left:5.8pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-bottom:solid windowtext 3.0pt;mso-border-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Value of </span></font><span class=SpellE><font
+  face="Courier New"><span style='font-family:"Courier New"'>st</span></font></span></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:solid windowtext 1.0pt;
+  border-left:none;border-bottom:solid windowtext 3.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node to refer to</span></font></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 3.0pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 3.0pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>EQUAL<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 3.0pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 3.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is equal to the key </span></font><font
+  face="Courier New"><span style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>LESS<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the maximum of the keys of all the
+  nodes with keys less than the key </span></font><font face="Courier New"><span
+  style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>GREATER<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the minimum of the keys of all the
+  nodes with keys greater than the key </span></font><font face="Courier New"><span
+  style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>LESS_EQUAL<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the maximum of the keys of all the
+  nodes with keys less than or equal to the key </span></font><font
+  face="Courier New"><span style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5;mso-yfti-lastrow:yes'>
+  <td width="28%" valign=top style='width:28.36%;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:
+  12.0pt;font-family:"Courier New"'>GREATER_EQUAL<o:p></o:p></span></font></p>
+  </td>
+  <td width="71%" valign=top style='width:71.64%;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><font size=3 face="Times New Roman"><span
+  style='font-size:12.0pt'>Node whose key is the minimum of the keys of all the
+  nodes with keys greater than or equal to the key </span></font><font
+  face="Courier New"><span style='font-family:"Courier New"'>k</span></font>.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.12<span style='mso-spacerun:yes'>  </span>Function</span></font></i></b></span><span
+style='mso-bidi-font-weight:normal;mso-bidi-font-style:normal'> </span><span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>start_iter_least</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>start_iter_least</span>(<span
+class=SpellE>avl</span> *tree, <span class=SpellE>iter</span> *it);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Cause the iterator to refer to the node with the minimum key in the
+given tree.<span style='mso-spacerun:yes'>  </span>Puts the iterator into the
+null state if the tree is empty or a read error occurs.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.13<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> <span class=SpellE>start_iter_greatest</span></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>start_iter_greatest</span>(<span
+class=SpellE>avl</span> *tree, <span class=SpellE>iter</span> *it);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Cause the iterator to refer to the node with the maximum key in the
+given tree.<span style='mso-spacerun:yes'>  </span>Puts the iterator into the
+null state if the tree is empty or a read error occurs.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.14<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>get_iter</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=SpellE>get_<span class=GramE>iter</span></span><span
+class=GramE>(</span><span class=SpellE>iter</span> *it);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Returns the handle of the node that the iterator
+refers to.</span></font></span><span style='mso-spacerun:yes'>  </span>Returns
+the null value if the iterator is in the null state.<span
+style='mso-spacerun:yes'>  </span>The return value is undefined if the <span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structure was not passed to a start function.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.15<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>incr_iter</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>incr_iter</span>(<span
+class=SpellE>iter</span> *it);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Causes the iterator to refer to the node whose key is the next highest
+after the key of the node the iterator currently refers to.<span
+style='mso-spacerun:yes'>  </span>Puts the iterator into the null state if the
+key of the node currently referred to is the maximum of the keys of all the
+nodes in the tree, or if a read error occurs.<span style='mso-spacerun:yes'> 
+</span>Has no effect if the iterator is already in the null state.<span
+style='mso-spacerun:yes'>  </span>Effect undefined if </span></font><span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structure was not passed to a start function.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.16<span style='mso-spacerun:yes'> 
+</span>Function</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> </span><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>decr_iter</span></font></span>
+</h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>decr_iter</span>(<span
+class=SpellE>iter</span> *it);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>Causes the iterator to refer to the node whose key is the next lowest
+after the key of the node the iterator currently refers to.<span
+style='mso-spacerun:yes'>  </span>Puts the iterator into the null state if the
+key of the node currently referred to is the minimum of the keys of all the
+nodes in the tree, or if a read error occurs.<span style='mso-spacerun:yes'> 
+</span>Has no effect if the iterator is already in the null state.<span
+style='mso-spacerun:yes'>  </span>Effect undefined if </span></font><span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structure was not passed to a start function.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'><font
+size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:normal;
+mso-bidi-font-style:normal'>5.17 Function </span></font></i></b><span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>init_iter</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Courier New"><span
+style='font-size:12.0pt;font-family:"Courier New"'>void</span></font></span><font
+face="Courier New"><span style='font-family:"Courier New"'> <span class=SpellE>init_iter</span>(<span
+class=SpellE>iter</span> *it);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><span class=GramE><font size=3 face="Times New Roman"><span
+style='font-size:12.0pt'>Initializes the given iterator to the null state.</span></font></span><span
+style='mso-spacerun:yes'>  </span>An iterator does not have to be initialized
+prior to passing it to the &#8220;<span class=SpellE>start_iter</span>&#8221;
+functions.</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'><font
+size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:normal;
+mso-bidi-font-style:normal'>5.18 Function </span></font></i></b><span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>subst</span></font></span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_HANDLE <span class=SpellE><span class=GramE>subst</span></span><span
+class=GramE>(</span><span class=SpellE>avl</span> *tree, AVL_HANDLE <span
+class=SpellE>new_node</span>);<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>If the node whose handle is passed as </span></font><span class=SpellE><font
+face="Courier New"><span style='font-family:"Courier New"'>new_node</span></font></span>
+has the same key as a node that is already in the tree, then the node already
+in the tree is removed from the tree and replaced by the new node.<span
+style='mso-spacerun:yes'>  </span>If there is no node in the tree with the same
+key as the new node, no substitution is made, and the null value is
+returned.<span style='mso-spacerun:yes'>  </span>If a substitution is made, the
+handle of the node that was removed from the tree is returned.<span
+style='mso-spacerun:yes'>  </span>The null value is returned if a read error
+occurs. Calling this function invalidates all currently-existing <span
+class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>iter</span></font></span>
+structures (that are iterating over this tree).</p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h2 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:
+normal'><font size=4 face=Arial><span style='font-size:14.0pt;mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'>5.19<span style='mso-spacerun:yes'> 
+</span>Implementation</span></font></i></b></span><span style='mso-bidi-font-weight:
+normal;mso-bidi-font-style:normal'> Bit Masks</span></h2>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>These parameterless macros each expand to a distinct positive integer
+value.<span style='mso-spacerun:yes'>  </span>Each value masks a single
+bit.<span style='mso-spacerun:yes'>  </span>There is one macro for each of the function
+prototypes generated by the interface header file.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_INIT<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_IS_EMPTY<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_INSERT<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_SEARCH<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_SEARCH_LEAST<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_SEARCH_GREATEST<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_REMOVE<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_BUILD<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_START_ITER<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_START_ITER_LEAST<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_START_ITER_GREATEST<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_GET_ITER<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_INCR_ITER<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_DECR_ITER<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_INIT_ITER<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_SUBST<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'>This parameterless macro masks all the bits.</span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Courier New"><span style='font-size:12.0pt;
+font-family:"Courier New"'>AVL_IMPL_ALL<o:p></o:p></span></font></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<h1 style='margin-left:0in;text-indent:0in;mso-list:none;tab-stops:.5in'><span
+class=GramE><b style='mso-bidi-font-weight:normal'><font size=5 face=Arial><span
+style='font-size:16.0pt;mso-bidi-font-weight:normal'>6<span
+style='mso-spacerun:yes'>  </span>Version</span></font></b></span><span
+style='mso-bidi-font-weight:normal'> History</span></h1>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><font size=4
+face="Times New Roman"><span style='font-size:14.0pt;font-weight:bold;
+mso-bidi-font-weight:normal'>Version 1.0<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<ul style='margin-top:0in' type=circle>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo7;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Initial
+     version.</span></font></li>
+</ul>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><font size=4
+face="Times New Roman"><span style='font-size:14.0pt;font-weight:bold;
+mso-bidi-font-weight:normal'>Version 1.1<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<ul style='margin-top:0in' type=circle>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo7;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Added default
+     for </span></font><font face="Courier New"><span style='font-family:"Courier New"'>AVL_SIZE</span></font>.</li>
+ <li class=MsoNormal style='mso-list:l5 level1 lfo7;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Minor
+     improvements to documentation.</span></font></li>
+</ul>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><font size=4
+face="Times New Roman"><span style='font-size:14.0pt;font-weight:bold;
+mso-bidi-font-weight:normal'>Version 1.2<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<ul style='margin-top:0in' type=circle>
+ <li class=MsoNormal style='mso-list:l11 level1 lfo11;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Changed
+     preprocessor statements to determine the number of bits in a </span></font><font
+     face="Courier New"><span style='font-family:"Courier New"'>long</span></font>
+     to be more portable.</li>
+</ul>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><font size=4
+face="Times New Roman"><span style='font-size:14.0pt;font-weight:bold;
+mso-bidi-font-weight:normal'>Version 1.3<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<ul style='margin-top:0in' type=circle>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo14;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Added </span></font><span
+     class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>subst</span></font></span>
+     function.</li>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo14;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Other minor
+     improvements to example 1 code and documentation.</span></font></li>
+</ul>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><font size=4
+face="Times New Roman"><span style='font-size:14.0pt;font-weight:bold;
+mso-bidi-font-weight:normal'>Version 1.4<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<ul style='margin-top:0in' type=circle>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo17;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Added
+     documentation and implementation mask for </span></font><span
+     class=SpellE><font face="Courier New"><span style='font-family:"Courier New"'>init_iter</span></font></span>
+     function.</li>
+ <li class=MsoNormal style='mso-list:l15 level1 lfo17;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>Other
+     cosmetic changes.</span></font></li>
+</ul>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><font size=4
+face="Times New Roman"><span style='font-size:14.0pt;font-weight:bold;
+mso-bidi-font-weight:normal'>Version 1.5<o:p></o:p></span></font></b></p>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<ul style='margin-top:0in' type=circle>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo20;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>A pointer to
+     the </span></font><span class=SpellE><font face="Courier New"><span
+     style='font-family:"Courier New"'>avl</span></font></span> structure is now
+     passed to the balance function only if <font face="Courier New"><span
+     style='font-family:"Courier New"'>AVL_INSIDE_STRUCT</span></font> is
+     defined.</li>
+ <li class=MsoNormal style='mso-list:l9 level1 lfo20;tab-stops:list .5in'><font
+     size=3 face="Times New Roman"><span style='font-size:12.0pt'>This (HTML)
+     document now uses an ISO character encoding (instead of the deceptively
+     similar proprietary encoding that was the default in my HTML editor).</span></font></li>
+</ul>
+
+<p class=MsoNormal><font size=3 face="Times New Roman"><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+</div>
+
+</body>
+
+</html>

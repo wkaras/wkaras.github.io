@@ -1,0 +1,102 @@
+/* Portable Spinlock Code.
+** This code is in the public domain.
+** Author:  Walt Karas
+**
+** WARNING:  This code has not been tested in any way.
+*/
+
+#include "spinlock.h"
+
+void spinlock_init(spinlock *sl)
+  {
+    register spinlock_proc_num i;
+
+    sl->has_lock = SPINLOCK_NO_PROC;
+
+    for (i = 0; i < SPINLOCK_NUM_PROCS; i++)
+      sl->flag[i] = 0;
+  }
+
+/* NOTE:  For this function to work properly, the actual order of reads
+** and writes to the spinlock in memory has to be the same as the
+** nominal order of reads and writes to the spinlock in the code.
+** Making the spinlock volatile should guarantee this, but one should
+** not be so trusting.  On a MIPS implementation I have some experience
+** with, a sync instruction is needed between load/store instructions
+** to make sure that actual memory operation occurs in the order of
+** load/store execution.  But the gcc port that was available did not
+** seem to generate "sync" instructions as a result of declaring
+** something to be volatile.  To use this code for that target,
+** it would be necessary to intersperce "asm" directives at the
+** appropriate places in the code to insert the "sync" instructions.
+*/
+int spinlock_try(volatile spinlock *sl, spinlock_proc_num p_num)
+  {
+    register spinlock_proc_num i;
+    int result = 0;
+
+    if (sl->has_lock == SPINLOCK_NO_PROC)
+      {
+	/* The spinlock is available, so this processor tells the other
+	** processors it's going after the spinlock.
+	*/
+	sl->flag[p_num] = 1;
+
+	if (sl->has_lock == SPINLOCK_NO_PROC)
+	  {
+	    /* At this point, the processors that are still in contention
+	    ** for the spinlock are the ones that managed to read
+	    ** "has_lock" before it was written by any processor.  The
+	    ** last processor to execute this next assignment statement
+	    ** will get the spinlock.
+	    */
+	    sl->has_lock = p_num;
+
+	    i = 0;
+	    for ( ; ; )
+	      {
+		if (!(sl->flag[i]) || (i == p_num))
+		  {
+		    i++;
+		    if (i == SPINLOCK_NUM_PROCS)
+		      {
+			/* The flags for all the other processors have
+			** been lowered, and "has_lock" still contains the
+			** number of this processor, so this processor
+			** got the spinlock.
+			*/
+			result = 1;
+			break;
+		      }
+		  }
+		else if (sl->has_lock != p_num)
+		  /* Another processor wrote "has_lock" after this one,
+		  ** so this processor did not get the spinlock.
+		  */
+		  break;
+	      }
+	  }
+
+	sl->flag[p_num] = 0;
+      }
+
+    return(result);
+  }
+
+void spinlock_wait(volatile spinlock *sl, spinlock_proc_num p_num)
+  {
+    while (!spinlock_try(sl, p_num))
+      ;
+  }
+
+void spinlock_release(volatile spinlock *sl, spinlock_proc_num p_num)
+  {
+    /* Only release if this processor has the spinlock. */
+    if (sl->has_lock == p_num)
+      sl->has_lock = SPINLOCK_NO_PROC;
+  }
+
+spinlock_proc_num spinlock_who(volatile spinlock *sl)
+  {
+    return(sl->has_lock);
+  }

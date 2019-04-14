@@ -1,0 +1,26 @@
+#ifndef PP_CONCAT_H_
+#define PP_CONCAT_H_
+
+/* Concatenates two tokens into a single token, after exanding either or
+** both tokens if they are preprocessor symbols.
+**
+** Example:
+**
+** #define S1 a
+** #define S2 b
+** #define S3 S1
+**
+** PP_CONCATE(S3, S2)
+**
+** This will expand to the token:
+**
+** ab
+*/
+#define PP_CONCAT(A, B) PP_CONCAT_(A, B)
+
+/* This "helper" macro is necessary because the macro processor does
+** parameter concatenation BEFORE any expansion.
+*/
+#define PP_CONCAT_(A, B) A ## B
+
+#endif

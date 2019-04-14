@@ -1,0 +1,25 @@
+/* Example usage of gen_enum.h. */
+
+#include <stdio.h>
+
+#define P__NAME COLOR
+
+#define P__ELEMENTS X(RED) X(GREEN) X(BLUE)
+
+#define P__IMPLEMENTATION
+
+#include "gen_enum.h"
+
+int main(void)
+  {
+    int i;
+
+    printf("number of colors = %u\n\n", (unsigned) COLOR_NUM_ELEMS);
+
+    printf("%s %s %s\n\n", COLOR_str[GREEN], COLOR_str[RED], COLOR_str[BLUE]);
+
+    for (i = 0; i < COLOR_NUM_ELEMS; i++)
+      printf("%s\n", COLOR_str[i]);
+
+    return(0);
+  }

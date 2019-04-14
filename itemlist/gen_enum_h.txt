@@ -1,0 +1,81 @@
+/* This header file defines an enum and a corresponding array
+** of strings.  This header file may alter the definition of
+** any preprocessor symbol beginning with L__ (uppercase L
+** followed by 2 underscores).
+**
+** INPUTS
+**
+** These two preprocessor symbols must be defined prior to the
+** inclusion of this header.  (Symbol names begin with an uppercase
+** P followed by 2 underscores).
+**
+** P__NAME - must expand to the identifier that will be the name
+**   of the enum.  An example definition of P__NAME is:
+**   #define P__NAME COLOR
+**
+** P__ELEMENTS - must expand to a list of one or more items of the
+**   for X(elem_name), where elem_name stands for the name of an
+**   element of the enum.  An example definition of P__ELEMENTS is:
+**   #define P__ELEMENTS X(RED) X(GREEN) X(BLUE)
+**
+** The preprocessor symbol P__IMPLEMENTATION, if defined, causes
+** the generation of the initialized array of string names of the
+** enum's elements.
+**
+** OUTPUTS
+**
+** typedef enum { <elem_name>, ... ,  <P_NAME>_NUM_ELEMS } <P__NAME>;
+**
+**   (example: typedef enum { RED, GREEN, BLUE, COLOR_NUM_ELEMS } COLOR;)
+**
+** extern const char *(<P__NAME>_str[]);
+**
+**   (example: extern const char *(COLOR_str[]);)
+**
+** If P__IMPLEMENTATION is defined:
+**
+** const char *(<P__NAME>_str[]) = { "<elem_name>", ... };
+**
+**   (example: const char *(COLOR_str[]) = { "RED", "GREEN", "BLUE" };)
+*/
+
+#undef X
+
+/* Defines the PP_CONCAT macro. */
+#include "pp_concat.h"
+
+#ifndef P__NAME
+#error P__NAME parameter not defined
+#endif
+
+#ifndef P__ELEMENTS
+#error P__ELEMENTS parameter not defined
+#endif
+
+#define X(ELEM) ELEM,
+
+typedef enum
+  {
+    P__ELEMENTS
+    PP_CONCAT(P__NAME, _NUM_ELEMS)
+  }
+P__NAME;
+
+extern const char *(PP_CONCAT(P__NAME, _str)[]);
+
+#ifdef P__IMPLEMENTATION
+
+/* Define a macro that converts a token to a string. */
+#undef L__MKSTR
+#define L__MKSTR(X) #X
+
+#undef X
+#define X(ELEM) L__MKSTR(ELEM),
+
+const char *(PP_CONCAT(P__NAME, _str)[]) = { P__ELEMENTS 0 };
+
+#undef L__MKSTR
+
+#endif /* Implementation */
+
+#undef X

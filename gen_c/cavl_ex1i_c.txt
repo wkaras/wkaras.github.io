@@ -1,0 +1,43 @@
+/* Abstract AVL Tree Generic Package Example 1 (implementation).
+** This code is in the public domain.
+** Version: 1.5  Author: Walt Karas
+*/
+
+#include <string.h>
+
+#include "cavl_ex1.h"
+
+#undef AVL_GET_LESS
+#undef AVL_SET_LESS
+#undef AVL_GET_GREATER
+#undef AVL_SET_GREATER
+#undef AVL_GET_BALANCE_FACTOR
+#undef AVL_SET_BALANCE_FACTOR
+#undef AVL_COMPARE_KEY_NODE
+#undef AVL_COMPARE_NODE_NODE
+#undef AVL_NULL
+
+/* Nodes not in secondary storage, so no read errors possible. */
+#undef AVL_READ_ERRORS_HAPPEN
+
+#define AVL_GET_LESS(H, ACCESS) ((H)->lt)
+#define AVL_SET_LESS(H, LH) { (H)->lt = (LH); }
+#define AVL_GET_GREATER(H, ACCESS) ((H)->gt)
+#define AVL_SET_GREATER(H, GH) { (H)->gt = (GH); }
+
+#define AVL_GET_BALANCE_FACTOR(H) (((int) (H)->bf) - 1)
+#define AVL_SET_BALANCE_FACTOR(H, BF) { (H)->bf = (unsigned char) ((BF) + 1); }
+
+#define AVL_COMPARE_KEY_NODE(K, H) (strcmp((K), (H)->name))
+
+#define AVL_COMPARE_NODE_NODE(H1, H2) (strcmp((H1)->name, (H2)->name))
+
+#define AVL_NULL ((node_env_avl *) 0)
+
+#undef AVL_PRIVATE
+
+#define AVL_IMPL_MASK \
+(AVL_IMPL_INSERT | AVL_IMPL_SEARCH | AVL_IMPL_START_ITER_LEAST | \
+ AVL_IMPL_GET_ITER | AVL_IMPL_INCR_ITER | AVL_IMPL_INIT | AVL_IMPL_REMOVE)
+
+#include "cavl_impl.h"

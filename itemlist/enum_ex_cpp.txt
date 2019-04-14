@@ -1,0 +1,54 @@
+// This code is in the public domain.
+// Author: Walt Karas
+
+// Example usage of enum.hpp .
+
+#include "enum.hpp"
+
+// Define enum Color with element Color_red, Color_green, Color_blue,
+// Color_yellow .
+
+#define COLOR_LIST(E, S) \
+E(Color_red) S E(Color_green) S E(Color_blue) S E(Color_yellow)
+
+ENUM_DEFINE(Color, COLOR_LIST)
+
+// Define a lookup Color -> const char * color string name.
+
+#define COLOR_STR_LIST(E, S) \
+E(Color_blue, "Blue") S \
+E(Color_green, "Green") S \
+E(Color_yellow, "Yellow") S \
+E(Color_red, "Red")
+
+ENUM_LOOKUP(Color, COLOR_LIST, Color_str, char *, COLOR_STR_LIST)
+
+// Define a lookup Color -> unsigned color "weight".
+
+#define COLOR_WEIGHT_LIST(E, S) \
+E(Color_blue, 5) S \
+E(Color_green, 10) S \
+E(Color_yellow, 15) S \
+E(Color_red, 20)
+
+ENUM_LOOKUP(Color, COLOR_LIST, Weight, unsigned, COLOR_WEIGHT_LIST)
+
+// Use the COLOR_WEIGHT_LIST format to calculate (at compile time)
+// the total of all color weights.
+
+#define JUST_WEIGHT(C, W) (W)
+
+const unsigned Total_weight = COLOR_WEIGHT_LIST(JUST_WEIGHT, +);
+
+// Trivial example usage of these definitions.
+
+#include <cstdio>
+
+int main(void)
+  {
+    std::printf(
+      "%d %s %u %u\n", Color_yellow, Color_str[Color_yellow],
+      Weight[Color_yellow], Total_weight);
+
+    return(0);
+  }
