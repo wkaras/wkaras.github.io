@@ -1,972 +1,205 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
-xmlns="http://www.w3.org/TR/REC-html40">
-
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
-<meta name=ProgId content=Word.Document>
-<meta name=Generator content="Microsoft Word 10">
-<meta name=Originator content="Microsoft Word 10">
-<link rel=File-List href="matrix_mult_files/filelist.xml">
-<title>C Matrix Multiplication</title>
-<!--[if gte mso 9]><xml>
- <o:OfficeDocumentSettings>
-  <o:DoNotRelyOnCSS/>
- </o:OfficeDocumentSettings>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <w:WordDocument>
-  <w:ActiveWritingStyle Lang="EN-US" VendorID="64" DLLVersion="131078"
-   NLCheck="1">1</w:ActiveWritingStyle>
-  <w:ActiveWritingStyle Lang="ES-MX" VendorID="64" DLLVersion="131078"
-   NLCheck="1">1</w:ActiveWritingStyle>
-  <w:SpellingState>Clean</w:SpellingState>
-  <w:GrammarState>Clean</w:GrammarState>
-  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
- </w:WordDocument>
-</xml><![endif]-->
-<style>
-<!--
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{mso-style-parent:"";
-	margin:0in;
-	margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:"Times New Roman";
-	mso-fareast-font-family:"Times New Roman";}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;
-	text-underline:single;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:purple;
-	text-decoration:underline;
-	text-underline:single;}
-span.SpellE
-	{mso-style-name:"";
-	mso-spl-e:yes;}
-span.GramE
-	{mso-style-name:"";
-	mso-gram-e:yes;}
-@page Section1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;
-	mso-header-margin:.5in;
-	mso-footer-margin:.5in;
-	mso-paper-source:0;}
-div.Section1
-	{page:Section1;}
- /* List Definitions */
- @list l0
-	{mso-list-id:774638205;
-	mso-list-type:hybrid;
-	mso-list-template-ids:809533842 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
-@list l0:level1
-	{mso-level-tab-stop:.25in;
-	mso-level-number-position:left;
-	margin-left:.25in;
-	text-indent:-.25in;}
-@list l0:level2
-	{mso-level-tab-stop:1.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level3
-	{mso-level-tab-stop:1.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level4
-	{mso-level-tab-stop:2.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level5
-	{mso-level-tab-stop:2.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level6
-	{mso-level-tab-stop:3.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level7
-	{mso-level-tab-stop:3.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level8
-	{mso-level-tab-stop:4.0in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-@list l0:level9
-	{mso-level-tab-stop:4.5in;
-	mso-level-number-position:left;
-	text-indent:-.25in;}
-ol
-	{margin-bottom:0in;}
-ul
-	{margin-bottom:0in;}
--->
-</style>
-<!--[if gte mso 10]>
-<style>
- /* Style Definitions */
- table.MsoNormalTable
-	{mso-style-name:"Table Normal";
-	mso-tstyle-rowband-size:0;
-	mso-tstyle-colband-size:0;
-	mso-style-noshow:yes;
-	mso-style-parent:"";
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:10.0pt;
-	font-family:"Times New Roman";}
-table.MsoTableGrid
-	{mso-style-name:"Table Grid";
-	mso-tstyle-rowband-size:0;
-	mso-tstyle-colband-size:0;
-	border:solid windowtext 1.0pt;
-	mso-border-alt:solid windowtext .5pt;
-	mso-padding-alt:0in 5.4pt 0in 5.4pt;
-	mso-border-insideh:.5pt solid windowtext;
-	mso-border-insidev:.5pt solid windowtext;
-	mso-para-margin:0in;
-	mso-para-margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:10.0pt;
-	font-family:"Times New Roman";}
-</style>
-<![endif]--><!--[if gte mso 9]><xml>
- <o:shapedefaults v:ext="edit" spidmax="8194"/>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <o:shapelayout v:ext="edit">
-  <o:idmap v:ext="edit" data="1"/>
- </o:shapelayout></xml><![endif]-->
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>C Matrix Multiplication</title>
+	<meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2025-03-14T22:08:01.032767865"/>
+	<meta name="Originator" content="Microsoft Word 10"/>
+	<meta name="ProgId" content="Word.Document"/>
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin-left: 0.79in; margin-right: 0.39in; margin-top: 0.39in; margin-bottom: 0.39in }
+		p { color: #000000; line-height: 115%; margin-bottom: 0.1in; background: transparent; background: transparent }
+		pre { color: #000000; background: transparent; background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		a:link { color: #0000ff; text-decoration: underline }
+		a:visited { color: #800080; text-decoration: underline }
+	</style>
 </head>
-
-<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
-
-<div class=Section1>
-
-<p class=MsoNormal style='tab-stops:-9.0pt .25in'><font size=3
-face="Times New Roman"><span style='font-size:12.0pt'>Write an <i><span
-style='font-style:italic'>optimized</span></i> program in C to multiply two
-linear matrices.<span style='mso-spacerun:yes'>  </span>This program should
-take as input the dimensions of each matrix, as well as the components of each
-matrix.<span style='mso-spacerun:yes'>  </span>State any assumptions you made
-when writing this program.<span style='mso-spacerun:yes'>  </span>Use the
-following matrices as a test:</span></font></p>
-
-<p class=MsoNormal style='tab-stops:-9.0pt'><font size=3 face="Times New Roman"><span
-style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:23.4pt 36.9pt 59.4pt 81.9pt 1.45in 126.9pt 149.4pt'><font
-size=3 face="Times New Roman"><span style='font-size:12.0pt'>1<span
-style='mso-tab-count:2'>          </span>0<span style='mso-tab-count:4'>                            </span></span></font></p>
-
-<p class=MsoNormal style='tab-stops:23.4pt 36.9pt 59.4pt 81.9pt 1.45in 126.9pt 149.4pt'><font
-size=3 face="Times New Roman"><span style='font-size:12.0pt'>-2<span
-style='mso-tab-count:2'>         </span>3<span style='mso-tab-count:2'>             </span>0<span
-style='mso-tab-count:1'>      </span>6<span style='mso-tab-count:1'>      </span>1</span></font></p>
-
-<p class=MsoNormal style='tab-stops:23.4pt 36.9pt 59.4pt 81.9pt 1.45in 126.9pt 149.4pt'><font
-size=3 face="Times New Roman"><span style='font-size:12.0pt'>5<span
-style='mso-tab-count:2'>          </span>4<span style='mso-tab-count:2'>             </span>3<span
-style='mso-tab-count:1'>      </span>8<span style='mso-tab-count:1'>      </span>-2</span></font></p>
-
-<p class=MsoNormal style='tab-stops:23.4pt 36.9pt 59.4pt 81.9pt 1.45in 126.9pt 149.4pt'><font
-size=3 face="Times New Roman"><span style='font-size:12.0pt'>0<span
-style='mso-tab-count:2'>          </span>1<span style='mso-tab-count:4'>                            </span></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 face="Times New Roman"><span
-style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'>Assumptions:<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:list .25in left 240.0pt'><![if !supportLists]><font size=3
-color=blue face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>1.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>No checking for output errors OK.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l0 level1 lfo2;
-tab-stops:list .25in left 240.0pt'><![if !supportLists]><font size=3
-color=blue face="Times New Roman"><span style='font-size:12.0pt;color:blue'><span
-style='mso-list:Ignore'>2.<font size=1 face="Times New Roman"><span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></span></font><![endif]><font
-color=blue><span style='color:blue'>Terse messages on input errors OK.<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=3 color=blue
-face="Times New Roman"><span style='font-size:12.0pt;color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &lt;<span class=SpellE>stdio.h</span>&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#include &lt;<span class=SpellE>stdlib.h</span>&gt;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>typedef</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> <span class=SpellE>int</span> <span class=SpellE>elem_type</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#define SCAN_ELEM &quot;%d&quot;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#define PRINT_ELEM &quot;%12d&quot;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>#define ELEM_ZERO 0<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>/* Matrix in the heap. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>typedef</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> struct<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>unsigned</span>
-<span class=SpellE>num_rows</span>, <span class=SpellE>num_columns</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* <span class=GramE>The</span>
-size of this array is really <span class=SpellE>num_rows</span> * <span
-class=SpellE>num_columns</span>.<span style='mso-spacerun:yes'> 
-</span>Elements are<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>** stored in row-major
-order. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE><span
-class=GramE>elem_type</span></span> <span class=SpellE>elem</span>[1];<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>matrix</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>void</span></font></span><font size=2 color=blue face="Courier New"><span
-style='font-size:10.0pt;font-family:"Courier New";color:blue'> *<span
-class=SpellE>safe_alloc</span>(<span class=SpellE>size_t</span> <span
-class=SpellE>sz</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>void</span>
-*p = malloc(<span class=SpellE>sz</span>);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>if</span>
-(!p)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>fprintf</span></span><span class=GramE>(</span><span class=SpellE>stderr</span>,
-&quot;\<span class=SpellE>nheap</span> exhausted\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>exit(</span>1);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>return(</span>p);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>matrix</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> *<span class=SpellE>alloc_matrix_in_heap</span>(unsigned <span
-class=SpellE>n_rows</span>, unsigned <span class=SpellE>n_cols</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>matrix</span>
-*p =<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>(<span class=GramE>matrix</span>
-*)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE>safe_<span
-class=GramE>alloc</span></span><span class=GramE>(</span>sizeof(matrix) +<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>                   </span><span
-class=GramE>sizeof(</span><span class=SpellE>elem_type</span>) * (<span
-class=SpellE>n_rows</span> * <span class=SpellE>n_cols</span> - 1));<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>p</span>-&gt;<span
-class=SpellE>num_rows</span> = <span class=SpellE>n_rows</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>p</span>-&gt;<span
-class=SpellE>num_columns</span> = <span class=SpellE>n_cols</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>matrix</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> *<span class=SpellE>matrix_mul</span>(const matrix *a, const
-matrix *b)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>/* <span class=GramE>The</span>
-product. */<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>matrix</span>
-*c = <span class=SpellE>alloc_matrix_in_heap</span>(a-&gt;<span class=SpellE>num_rows</span>,
-b-&gt;<span class=SpellE>num_columns</span>);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-const <span class=SpellE>elem_type</span> *pa = a-&gt;<span class=SpellE>elem</span>,
-*<span class=SpellE>pb</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>elem_type</span>
-*pc = c-&gt;<span class=SpellE>elem</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>unsigned</span>
-<span class=SpellE>a_cols</span> = a-&gt;<span class=SpellE>num_columns</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-unsigned <span class=SpellE>b_cols</span> = b-&gt;<span class=SpellE>num_columns</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>const</span>
-<span class=SpellE>elem_type</span> *<span class=SpellE>pb_col</span> = b-&gt;<span
-class=SpellE>elem</span>, *<span class=SpellE>pb_col_last</span> = <span
-class=SpellE>pb_col</span> + <span class=SpellE>b_cols</span> - 1;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>elem_type</span>
-*<span class=SpellE>pc_end</span> = c-&gt;<span class=SpellE>elem</span> +
-a-&gt;<span class=SpellE>num_rows</span> * <span class=SpellE>b_cols</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-unsigned dc;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-<span class=SpellE>elem_type</span> <span class=SpellE>tmp</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>for</span>
-( ; ; )<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>dc</span>
-= <span class=SpellE>a_cols</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>pb</span></span> = <span class=SpellE>pb_col</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>tmp</span></span> = ELEM_ZERO;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>do</span><o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span><span
-class=SpellE><span class=GramE>tmp</span></span> += *(pa++) * *<span
-class=SpellE>pb</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span><span
-class=SpellE><span class=GramE>pb</span></span> += <span class=SpellE>b_cols</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>while</span>
-(--dc);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>*(pc++) = <span
-class=SpellE>tmp</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>if</span>
-(pc == <span class=SpellE>pc_end</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span><span class=GramE>break</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>if</span>
-(<span class=SpellE>pb_col</span> == <span class=SpellE>pb_col_last</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span><span class=SpellE>pb_col</span>
-= b-&gt;<span class=SpellE>elem</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>else</span><o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>       </span><span
-style='mso-spacerun:yes'>   </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span><span
-class=SpellE><span class=GramE>pb_col</span></span>++;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>            </span><span
-class=GramE>pa</span> -= <span class=SpellE>a_cols</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>return(</span>c);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>unsigned</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> <span class=SpellE>read_unsigned</span>(void)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>unsigned</span>
-u;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>if</span>
-(<span class=SpellE>scanf</span>(&quot; %u&quot;, &amp;u) != 1)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>fprintf</span></span><span class=GramE>(</span><span class=SpellE>stderr</span>,
-&quot;\<span class=SpellE>nbad</span> input\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>exit(</span>1);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>return(</span>u);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=SpellE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>elem_type</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> <span class=SpellE>read_<span class=GramE>elem</span></span><span
-class=GramE>(</span>void)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE><span
-class=GramE>elem_type</span></span> u;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>if</span>
-(<span class=SpellE>scanf</span>(&quot; &quot; SCAN_ELEM, &amp;u) != 1)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>fprintf</span></span><span class=GramE>(</span><span class=SpellE>stderr</span>,
-&quot;\<span class=SpellE>nbad</span> input\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>exit(</span>1);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>return(</span>u);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>matrix</span></font></span><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'> *<span class=SpellE>read_matrix</span>(void)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-unsigned r = <span class=SpellE>read_unsigned</span>();<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>unsigned</span>
-c = <span class=SpellE>read_unsigned</span>();<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>matrix</span>
-*m;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-<span class=SpellE>elem_type</span> *p;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>if</span>
-((r == 0) || (c == 0))<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>fprintf</span></span><span class=GramE>(</span><span class=SpellE>stderr</span>,
-&quot;\<span class=SpellE>nbad</span> input\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>exit(</span>1);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>m = <span class=SpellE>alloc_matrix_in_heap</span>(r,
-c);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>r</span>
-*= c;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>p = m-&gt;<span
-class=SpellE>elem</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>do</span><o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>*(p++) = <span
-class=SpellE>read_<span class=GramE>elem</span></span><span class=GramE>(</span>);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>while</span>
-(--r);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>return(</span>m);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=GramE><font size=2
-color=blue face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>void</span></font></span><font size=2 color=blue face="Courier New"><span
-style='font-size:10.0pt;font-family:"Courier New";color:blue'> <span
-class=SpellE>print_matrix</span>(const matrix *m)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>unsigned</span>
-r = m-&gt;<span class=SpellE>num_rows</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-unsigned c;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>register</span>
-const <span class=SpellE>elem_type</span> *p = m-&gt;<span class=SpellE>elem</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>do</span><o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span>c = m-&gt;<span
-class=SpellE>num_columns</span>;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>do</span><o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>          </span><span class=SpellE><span
-class=GramE>printf</span></span><span class=GramE>(</span>PRINT_ELEM, *(p++));<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>while</span>
-(--c);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>putchar</span></span><span class=GramE>(</span>'\n');<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>while</span>
-(--r);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><span class=SpellE><span
-class=GramE><font size=2 color=blue face="Courier New"><span style='font-size:
-10.0pt;font-family:"Courier New";color:blue'>int</span></font></span></span><font
-size=2 color=blue face="Courier New"><span style='font-size:10.0pt;font-family:
-"Courier New";color:blue'> main()<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>matrix</span>
-*a = <span class=SpellE>read_matrix</span>();<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>matrix</span>
-*b = <span class=SpellE>read_matrix</span>();<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>matrix</span>
-*c;<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>if</span>
-(a-&gt;<span class=SpellE>num_columns</span> != b-&gt;<span class=SpellE>num_rows</span>)<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>{<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=SpellE><span
-class=GramE>fprintf</span></span><span class=GramE>(</span><span class=SpellE>stderr</span>,
-&quot;\<span class=SpellE>nbad</span> input\n&quot;);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>        </span><span class=GramE>exit(</span>1);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>      </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span>c = <span class=SpellE>matrix_<span
-class=GramE>mul</span></span><span class=GramE>(</span>a, b);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>free(</span>a);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>free(</span>b);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=SpellE>print_matrix</span>(c);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>free(</span>c);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><o:p>&nbsp;</o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>    </span><span class=GramE>return(</span>0);<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><font size=2 color=blue
-face="Courier New"><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'><span style='mso-spacerun:yes'>  </span>}<o:p></o:p></span></font></p>
-
-<p class=MsoNormal style='tab-stops:240.0pt'><b><font size=3
-face="Times New Roman"><span style='font-size:12.0pt;font-weight:bold'><o:p>&nbsp;</o:p></span></font></b></p>
-
-</div>
-
+<body lang="en-US" text="#000000" link="#0000ff" vlink="#800080" dir="ltr"><p>
+<font face="Times New Roman"><font size="3" style="font-size: 12pt">Write
+an <i>optimized</i> program in C to multiply two linear matrices.
+This program should take as input the dimensions of each matrix, as
+well as the components of each matrix. State any assumptions you made
+when writing this program. Use the following matrices as a test:</font></font></p>
+<pre class="western">
+1 0
+-2 3 0 6 1
+5 4 3 8 -2
+0 1
+</pre><p>
+<font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">Assumptions:</font></font></font></p>
+<p><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">1.</font></font></font><span style="font-variant: normal"><font color="#0000ff">
+</font></span><font color="#0000ff">No checking for output errors OK.</font></p>
+<p><font color="#0000ff"><font face="Times New Roman"><font size="3" style="font-size: 12pt">2.</font></font></font><span style="font-variant: normal"><font color="#0000ff">
+</font></span><font color="#0000ff">Terse messages on input errors
+OK.</font></p>
+<pre class="western">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+ 
+typedef int elem_type;
+#define SCAN_ELEM &quot;%d&quot;
+#define PRINT_ELEM &quot;%12d&quot;
+#define ELEM_ZERO 0
+ 
+/* Matrix in the heap. */
+typedef struct
+  {
+    unsigned num_rows, num_columns;
+    /* The size of this array is really num_rows * num_columns.  Elements are
+    ** stored in row-major order. */
+    elem_type elem[1];
+  }
+matrix;
+ 
+void *safe_alloc(size_t sz)
+  {
+    void *p = malloc(sz);
+    if (!p)
+      {
+        fprintf(stderr, &quot;\nheap exhausted\n&quot;);
+        exit(1);
+      }
+    return(p);
+  }
+ 
+matrix *alloc_matrix_in_heap(unsigned n_rows, unsigned n_cols)
+  {
+    matrix *p =
+      (matrix *)
+        safe_alloc(sizeof(matrix) +
+                   sizeof(elem_type) * (n_rows * n_cols - 1));
+    p-&gt;num_rows = n_rows;
+    p-&gt;num_columns = n_cols;
+  }
+ 
+matrix *matrix_mul(const matrix *a, const matrix *b)
+  {
+    /* The product. */
+    matrix *c = alloc_matrix_in_heap(a-&gt;num_rows, b-&gt;num_columns);
+ 
+    register const elem_type *pa = a-&gt;elem, *pb;
+    elem_type *pc = c-&gt;elem;
+    unsigned a_cols = a-&gt;num_columns;
+    register unsigned b_cols = b-&gt;num_columns;
+    const elem_type *pb_col = b-&gt;elem, *pb_col_last = pb_col + b_cols - 1;
+    elem_type *pc_end = c-&gt;elem + a-&gt;num_rows * b_cols;
+    register unsigned dc;
+    register elem_type tmp;
+ 
+    for ( ; ; )
+      {
+        dc = a_cols;
+        pb = pb_col;
+        tmp = ELEM_ZERO;
+        do
+          {
+            tmp += *(pa++) * *pb;
+            pb += b_cols;
+          }
+        while (--dc);
+        *(pc++) = tmp;
+        if (pc == pc_end)
+          break;
+        if (pb_col == pb_col_last)
+          pb_col = b-&gt;elem;
+        else
+          {
+            pb_col++;
+            pa -= a_cols;
+          }
+      }
+    return(c);
+  }
+ 
+unsigned read_unsigned(void)
+  {
+    unsigned u;
+    if (scanf(&quot; %u&quot;, &amp;u) != 1)
+      {
+        fprintf(stderr, &quot;\nbad input\n&quot;);
+        exit(1);
+      }
+    return(u);
+  }
+ 
+elem_type read_elem(void)
+  {
+    elem_type u;
+    if (scanf(&quot; &quot; SCAN_ELEM, &amp;u) != 1)
+      {
+        fprintf(stderr, &quot;\nbad input\n&quot;);
+        exit(1);
+      }
+    return(u);
+  }
+ 
+matrix *read_matrix(void)
+  {
+    register unsigned r = read_unsigned();
+    unsigned c = read_unsigned();
+    matrix *m;
+    register elem_type *p;
+ 
+    if ((r == 0) || (c == 0))
+      {
+        fprintf(stderr, &quot;\nbad input\n&quot;);
+        exit(1);
+      }
+ 
+    m = alloc_matrix_in_heap(r, c);
+ 
+    r *= c;
+    p = m-&gt;elem;
+    do
+      *(p++) = read_elem();
+    while (--r);
+ 
+    return(m);
+  }
+ 
+void print_matrix(const matrix *m)
+  {
+    unsigned r = m-&gt;num_rows;
+    register unsigned c;
+    register const elem_type *p = m-&gt;elem;
+    do
+      {
+        c = m-&gt;num_columns;
+        do
+          printf(PRINT_ELEM, *(p++));
+        while (--c);
+        putchar('\n');
+      }
+    while (--r);
+  }
+ 
+int main()
+  {
+    matrix *a = read_matrix();
+    matrix *b = read_matrix();
+    matrix *c;
+ 
+    if (a-&gt;num_columns != b-&gt;num_rows)
+      {
+        fprintf(stderr, &quot;\nbad input\n&quot;);
+        exit(1);
+      }
+ 
+    c = matrix_mul(a, b);
+ 
+    free(a);
+    free(b);
+ 
+    print_matrix(c);
+ 
+    free(c);
+ 
+    return(0);
+  }</pre>
 </body>
-
 </html>
